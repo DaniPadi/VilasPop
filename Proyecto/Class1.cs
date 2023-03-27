@@ -8,5 +8,6 @@ namespace Proyecto
 {
     public class Class1
     {
+        const churro;
     }
 }
