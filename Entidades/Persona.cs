@@ -13,6 +13,7 @@ namespace Entidades
         String cedula { get; set; }
         String nombre { get; set; }
         String telefono { get; set; }
+
         public Persona(string cedula, string nombre, string telefono)
         {
             this.cedula = cedula;
