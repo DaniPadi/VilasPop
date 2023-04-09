@@ -8,7 +8,7 @@ namespace Entidades
 {
     internal class MateriaPrima
     {
-        public MateriaPrima(string idMateriaPrima, string nombreMateriaPrima, string cantidad, double costo, DateTime fechaCaducidad    )
+        public MateriaPrima(string idMateriaPrima, string nombreMateriaPrima, string cantidad, double costo, DateTime fechaCaducidad)
         {
             this.idMateriaPrima = idMateriaPrima;
             this.nombreMateriaPrima = nombreMateriaPrima;
