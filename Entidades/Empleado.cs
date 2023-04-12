@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    internal class Empleado: Persona
+    public class Empleado: Persona
     {
 
-        String cargo { get; set; }
-        String contrasena { get; set; }
+        public String cargo { get; set; }
+        public String contrasena { get; set; }
         public Empleado(string cedula, string nombre, string telefono,String cargo,String contrasena) : base(cedula, nombre, telefono)
         {
             this.cargo = cargo;

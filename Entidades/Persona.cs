@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    internal class Persona
+    public class Persona
     {
 
 
-        String cedula { get; set; }
-        String nombre { get; set; }
-        String telefono { get; set; }
+        public String cedula { get; set; }
+        public String nombre { get; set; }
+        public String telefono { get; set; }
         public Persona(string cedula, string nombre, string telefono)
         {
             this.cedula = cedula;
