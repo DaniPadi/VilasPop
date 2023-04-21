@@ -12,7 +12,7 @@ namespace Presentacion
 {
     public partial class InicioDeSesion : Form
     {
-        bool adminMode = false;
+        bool adminMode = true;
         string User ;
         string Password ;
         Empleado admin = new Empleado("admin","admin","1234","admin","1234");
@@ -20,6 +20,15 @@ namespace Presentacion
         public InicioDeSesion()
         {
             InitializeComponent();
+            if (adminMode == true) {
+                VentanaPrincipal formulario2 = new VentanaPrincipal();
+
+                this.Hide();
+                txtPass.Text = "";
+                txtUser.Text = "";
+                formulario2.ShowDialog();
+                this.Show();
+            }
 
         }
 
@@ -27,13 +36,13 @@ namespace Presentacion
         {
              User = txtUser.Text;
              Password = txtPass.Text;
-            if (User.Equals(admin.cedula) && adminMode)
+            if ((User.Equals(admin.cedula) && adminMode))
             {
-                if (Password.Equals(admin.contrasena) && adminMode)
+                if ((Password.Equals(admin.contrasena) && adminMode))
                 {
                     MessageBox.Show("Sesión Iniciada", "Inicio de Sesión", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     VentanaPrincipal formulario2 = new VentanaPrincipal();
-                    formulario2.Informacion = "Información que se va a pasar";
+                  
                     this.Hide();
                     txtPass.Text = "";
                     txtUser.Text = "";
