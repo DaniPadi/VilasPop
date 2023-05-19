@@ -8,5 +8,18 @@ namespace Entidades
 {
     internal class Venta
     {
+        public Venta(string id_producto, string id_factura, int cantidad, float valor)
+        {
+            this.id_producto = id_producto;
+            this.id_factura = id_factura;
+            this.cantidad = cantidad;
+            this.valor = valor;
+        }
+
+        public string id_producto { get; set; }
+        public string id_factura { get;set; }
+        public int cantidad { get; set; }
+        public float valor { get; set; }
+
     }
 }
