@@ -83,5 +83,10 @@ namespace Presentacion
                 adminMode = false;
             }
         }
+
+        private void InicioDeSesion_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

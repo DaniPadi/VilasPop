@@ -7,7 +7,7 @@ using Entidades;
 using Logica;
 namespace Prueba
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {

@@ -11,12 +11,10 @@ namespace Entidades
 
         public String cargo { get; set; }
         public String contrasena { get; set; }
-        public Empleado(string cedula, string nombre, string telefono,String cargo,String contrasena) : base(cedula, nombre, telefono)
+        public Empleado(string cedula, string nombre, string telefono, String cargo, String contrasena) : base(cedula, nombre, telefono)
         {
             this.cargo = cargo;
             this.contrasena = contrasena;
         }
-
-
     }
 }
