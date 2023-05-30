@@ -50,18 +50,20 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.txtUser);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(108, 47);
+            this.panel1.Location = new System.Drawing.Point(144, 58);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(216, 253);
+            this.panel1.Size = new System.Drawing.Size(288, 311);
             this.panel1.TabIndex = 1;
             // 
             // btnIngresar
             // 
-            this.btnIngresar.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIngresar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIngresar.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnIngresar.Location = new System.Drawing.Point(66, 216);
+            this.btnIngresar.Location = new System.Drawing.Point(76, 266);
+            this.btnIngresar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnIngresar.Name = "btnIngresar";
-            this.btnIngresar.Size = new System.Drawing.Size(89, 23);
+            this.btnIngresar.Size = new System.Drawing.Size(137, 28);
             this.btnIngresar.TabIndex = 5;
             this.btnIngresar.Text = "INGRESAR";
             this.btnIngresar.UseVisualStyleBackColor = true;
@@ -72,19 +74,21 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label3.Location = new System.Drawing.Point(26, 126);
+            this.label3.Location = new System.Drawing.Point(35, 155);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(90, 16);
+            this.label3.Size = new System.Drawing.Size(111, 20);
             this.label3.TabIndex = 4;
             this.label3.Text = "Contraseña:";
             // 
             // txtPass
             // 
-            this.txtPass.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPass.Location = new System.Drawing.Point(26, 145);
+            this.txtPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPass.Location = new System.Drawing.Point(35, 178);
+            this.txtPass.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPass.Name = "txtPass";
             this.txtPass.PasswordChar = '*';
-            this.txtPass.Size = new System.Drawing.Size(169, 27);
+            this.txtPass.Size = new System.Drawing.Size(224, 30);
             this.txtPass.TabIndex = 3;
             this.txtPass.UseSystemPasswordChar = true;
             this.txtPass.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InicioDeSesion_KeyDown);
@@ -95,18 +99,20 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label2.Location = new System.Drawing.Point(26, 51);
+            this.label2.Location = new System.Drawing.Point(35, 63);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 16);
+            this.label2.Size = new System.Drawing.Size(80, 20);
             this.label2.TabIndex = 2;
             this.label2.Text = "Usuario:";
             // 
             // txtUser
             // 
-            this.txtUser.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUser.Location = new System.Drawing.Point(26, 70);
+            this.txtUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUser.Location = new System.Drawing.Point(35, 86);
+            this.txtUser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(169, 27);
+            this.txtUser.Size = new System.Drawing.Size(224, 30);
             this.txtUser.TabIndex = 1;
             // 
             // label1
@@ -115,9 +121,10 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft PhagsPa", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label1.Location = new System.Drawing.Point(32, 0);
+            this.label1.Location = new System.Drawing.Point(43, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(154, 25);
+            this.label1.Size = new System.Drawing.Size(196, 32);
             this.label1.TabIndex = 0;
             this.label1.Text = "INICIAR SESIÓN";
             // 
@@ -125,26 +132,29 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(85, 32);
+            this.pictureBox1.Location = new System.Drawing.Point(113, 39);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(266, 283);
+            this.pictureBox1.Size = new System.Drawing.Size(355, 348);
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
             // InicioDeSesion
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(431, 362);
+            this.ClientSize = new System.Drawing.Size(572, 436);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximumSize = new System.Drawing.Size(447, 401);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MaximumSize = new System.Drawing.Size(590, 483);
             this.Name = "InicioDeSesion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Iniciar Sesión";
+            this.Load += new System.EventHandler(this.InicioDeSesion_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InicioDeSesion_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.InicioDeSesion_KeyUp);
             this.panel1.ResumeLayout(false);
