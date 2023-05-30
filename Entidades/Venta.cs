@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    internal class Venta
+    public class Venta
     {
+        public Venta()
+        {
+        }
+
         public Venta(string id_producto, string id_factura, int cantidad, float valor)
         {
             this.id_producto = id_producto;
@@ -21,5 +25,6 @@ namespace Entidades
         public int cantidad { get; set; }
         public float valor { get; set; }
 
+      
     }
 }

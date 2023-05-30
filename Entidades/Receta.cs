@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    internal class Receta
+    public class Receta
     {
+        public Receta()
+        {
+        }
+
         public Receta(string id, string receta, string productoID, string descripcion)
         {
             this.id = id;

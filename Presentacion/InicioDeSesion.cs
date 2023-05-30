@@ -15,7 +15,7 @@ namespace Presentacion
 {
     public partial class InicioDeSesion : Form
     {
-        bool adminMode = false;
+        bool adminMode = true;
         string User ;
         string Password ;
         Empleado admin = new Empleado("admin","admin","1234","admin","1234");

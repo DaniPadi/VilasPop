@@ -6,19 +6,23 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    internal class Recetas
+    public class Ingrediente
     {
-        public Recetas(string id, string materiaPrima, int unidades, float mililitros, float gramos)
+        public Ingrediente()
         {
-            this.id = id;
-            this.materiaPrima = materiaPrima;
+        }
+
+        public Ingrediente(string idReceta, string materiaPrima, int unidades, float mililitros, float gramos)
+        {
+            this.idReceta = idReceta;
+            this.idmateriaPrima = materiaPrima;
             this.unidades = unidades;
             this.mililitros = mililitros;
             this.gramos = gramos;
         }
 
-        public string id { get; set; }
-        public string materiaPrima { get; set; }
+        public string idReceta { get; set; }
+        public string idmateriaPrima { get; set; }
         public int unidades { get; set; }
         public float mililitros { get; set; }
         public float gramos { get; set; }

@@ -6,21 +6,25 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    internal class Producto
+    public class Producto
     {
-        public Producto(string idProducto, string nombreProducto, int stock, double precio)
+        public Producto()
+        {
+        }
+
+        public Producto(string idProducto, string nombreProducto, float precio)
         {
             this.idProducto = idProducto;
             this.nombreProducto = nombreProducto;
-            this.stock = stock;
+          
             this.precio = precio;
           
         }
 
-        String idProducto { get; set; }
-        String nombreProducto { get; set; }
-        int stock { get; set; }
-        double precio { get; set; }
+        public String idProducto { get; set; }
+        public String nombreProducto { get; set; }
+       
+        public float precio { get; set; }
 
 
     }

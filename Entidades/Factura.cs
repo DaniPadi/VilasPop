@@ -6,20 +6,27 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    internal class Factura
+    public class Factura
     {
-        public Factura(string id_factura, DateTime fecha, float precioTotal, string cliente)
+        public Factura()
+        {
+        }
+
+        public Factura(string id_factura, DateTime fecha, float precioTotal, string cliente, string idMetodo)
         {
             this.id_factura = id_factura;
             this.fecha = fecha;
             this.precioTotal = precioTotal;
-            this.cliente = cliente;
+            this.IdCliente = cliente;
+            IdMetodo = idMetodo;
         }
 
         public string id_factura { get; set; }
         public DateTime fecha { get; set; }
         public float precioTotal { get; set; }
 
-        public string cliente { get; set; }
+        public string IdCliente { get; set; }
+
+        public string IdMetodo { get; set; }
     }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    internal class Gasto
+    public class Gasto
     {
-        public Gasto(string idGasto, double costo, string materiaPrima, DateTime fecha, int unidades, float mililitros, float gramos, string descripcion)
+        public Gasto(string idGasto, float costo, Proveedor proveedor,  MateriaPrima materiaPrima, DateTime fecha,  float gramos, float mililitros, int unidades)
         {
             this.idGasto = idGasto;
             this.costo = costo;
@@ -17,16 +17,18 @@ namespace Entidades
             this.unidades = unidades;
             this.mililitros = mililitros;
             this.gramos = gramos;
-            this.descripcion = descripcion;
+            this.proveedor= proveedor;
+
         }
 
         public String idGasto { get; set; }
-        public double costo { get; set; }
-        public string materiaPrima { get; set; }
+        public float costo { get; set; }
+        public MateriaPrima materiaPrima { get; set; }
         public DateTime fecha { get; set; }
         public int unidades { get; set; }
         public float mililitros { get; set; }
         public float gramos { get; set; }
-        String descripcion { get; set; }
+        public Proveedor proveedor { get; set; }
+        
     }
 }
