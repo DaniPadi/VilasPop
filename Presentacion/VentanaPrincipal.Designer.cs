@@ -103,7 +103,7 @@
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupCliente = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.registrarCLiente = new System.Windows.Forms.Button();
             this.desplegar = new System.Windows.Forms.Button();
             this.label26 = new System.Windows.Forms.Label();
             this.txtCorreoCliente = new System.Windows.Forms.TextBox();
@@ -929,7 +929,7 @@
             // 
             // groupCliente
             // 
-            this.groupCliente.Controls.Add(this.button3);
+            this.groupCliente.Controls.Add(this.registrarCLiente);
             this.groupCliente.Controls.Add(this.desplegar);
             this.groupCliente.Controls.Add(this.label26);
             this.groupCliente.Controls.Add(this.txtCorreoCliente);
@@ -948,15 +948,15 @@
             this.groupCliente.TabStop = false;
             this.groupCliente.Text = "CLIENTE";
             // 
-            // button3
+            // registrarCLiente
             // 
-            this.button3.Location = new System.Drawing.Point(84, 231);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(81, 23);
-            this.button3.TabIndex = 11;
-            this.button3.Text = "Registrar";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.registrarCLiente.Location = new System.Drawing.Point(84, 231);
+            this.registrarCLiente.Name = "registrarCLiente";
+            this.registrarCLiente.Size = new System.Drawing.Size(81, 23);
+            this.registrarCLiente.TabIndex = 11;
+            this.registrarCLiente.Text = "Registrar";
+            this.registrarCLiente.UseVisualStyleBackColor = true;
+            this.registrarCLiente.Click += new System.EventHandler(this.registrarClientes_Click);
             // 
             // desplegar
             // 
@@ -1455,6 +1455,6 @@
         private System.Windows.Forms.Label labelInfo2;
         private System.Windows.Forms.Label labelInfo1;
         private System.Windows.Forms.Label labelInfo3;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button registrarCLiente;
     }
 }
