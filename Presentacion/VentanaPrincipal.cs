@@ -831,5 +831,31 @@ namespace Presentacion
             }
             groupCliente.Height = 81;
         }
+
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 3;
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 1;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 2;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 6;
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 4;
+        }
     }
 }
