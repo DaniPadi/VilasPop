@@ -163,31 +163,31 @@ namespace Presentacion
         {
             bool ActualizarMp = false;
             List<MateriaPrimaDTO> mtDTO = (List<MateriaPrimaDTO>)grillaMateriaP.DataSource;
-            int receta = 0;
+            int idViejo = 0;
             foreach (MateriaPrimaDTO materia in mtDTO)
             {
                 if (txtNombreMateriaP.Text.Equals(materia.NOMBRE))
                 {
                     Console.WriteLine(materia.NOMBRE);
                     ActualizarMp = true;
-                  
-                    return;
+                    idViejo = Int32.Parse(materia.ID);
+                    
                 }
             }
-
+            Console.WriteLine(idViejo);
             ingresarMateriaPrima();
             if (ActualizarMp) 
             {
-
+                reEnfocarProductos(Int32.Parse(txtIdMateriaPrima.Text), idViejo);
                 
             
             }
 
         }
 
-        private void reEnfocarProductos(int idMateria, int idReceta)
+        private void reEnfocarProductos(int idNuevo, int idViejo)
         {
-            
+            servicioIngrediente.reEnfocarProductos(idNuevo,idViejo);
         }
 
         public void ingresarMateriaPrima() 

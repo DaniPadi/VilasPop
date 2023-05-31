@@ -73,15 +73,15 @@ namespace Datos
 
         }
 
-        public int reEnfocarProductos(int idMateria, int idReceta) 
+        public int reEnfocarProductos(int idNuevo, int idViejo) 
         {
             Open();
             OracleCommand command = new OracleCommand("reemplazar_materiaprima", conexion);
             command.CommandType = CommandType.StoredProcedure;
 
             // Agregar los parámetros de entrada
-            command.Parameters.Add("p_id_materiap_new", OracleType.Number).Value = idMateria;
-            command.Parameters.Add("p_id_receta", OracleType.Number).Value = idReceta;
+            command.Parameters.Add("v_id_materiap_new", OracleType.Number).Value = idNuevo;
+            command.Parameters.Add("v_id_materiap_old", OracleType.Number).Value = idViejo;
 
             // Ejecutar el procedimiento almacenado
             int r = command.ExecuteNonQuery();
