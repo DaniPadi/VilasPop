@@ -10,21 +10,35 @@ namespace Logica
 {
     public class ClienteServicio
     {
-        ClienteRepositorio clienteServicio;
+        ClienteRepositorio clienteRepositorio;
 
         public ClienteServicio(string ConnectionString)
         {
-            this.clienteServicio = new ClienteRepositorio(ConnectionString);
+            this.clienteRepositorio = new ClienteRepositorio(ConnectionString);
         }
 
         public Cliente BuscarCliente(string text)
         {
-            throw new NotImplementedException();
+            List<Cliente> clientes = ObtenerCLientes();
+            foreach(Cliente cliente in clientes) 
+            {
+                if (cliente.cedula.Equals(text)) 
+                {
+                return cliente;
+                }
+            }
+
+            return null;
+        }
+
+        public string Insert(Cliente clienteNuevo)
+        {
+            return clienteRepositorio.Insert(clienteNuevo);
         }
 
         public List<Cliente> ObtenerCLientes()
         {
-            return clienteServicio.ObtenerCLientes();
+            return clienteRepositorio.ObtenerCLientes();
         
         }
         }

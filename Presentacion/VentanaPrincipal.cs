@@ -544,21 +544,31 @@ namespace Presentacion
         private void btnFacturar2_Click(object sender, EventArgs e)
         {
             Cliente cliente = servicioCLiente.BuscarCliente(txtCedulaCliente.Text);
-            if (cambio >= 0)
+            if (cliente != null) 
             {
-                Factura factura = new Factura(CodigoFactura, DateTime.Now, total, txtCedulaCliente.Text, "1");
-                string msg = servicioFactura.Insert(factura);
-                int msg2 = servicioVenta.Insert(ventasFacturando);
-                string msg3 = servicioMateriaPrima.Update(materiasPrimasParaActualizar);
-                MessageBox.Show("Factura: " + msg + " vendidos: " + msg2 + " actualizados: " + msg3);
-                generarPDF();
-                Limpiar();
+                if (cambio >= 0)
+                {
+                    Factura factura = new Factura(CodigoFactura, DateTime.Now, total, cliente.cedula, "1");
+                    string msg = servicioFactura.Insert(factura);
+                    int msg2 = servicioVenta.Insert(ventasFacturando);
+                    string msg3 = servicioMateriaPrima.Update(materiasPrimasParaActualizar);
+                    MessageBox.Show("Factura: " + msg + " vendidos: " + msg2 + " actualizados: " + msg3);
+                    generarPDF();
+                    Limpiar();
+                }
+                else
+                {
+                    MessageBox.Show("Saldo Insuficiente");
+                }
+
+
             }
-            else
+            else 
             {
-                MessageBox.Show("Saldo Insuficiente");
+
+                MessageBox.Show("Cliente no registrado");
             }
-            
+
 
         }
 
@@ -764,11 +774,14 @@ namespace Presentacion
             {
                 Cliente clienteNuevo = new Cliente(txtCedulaCliente.Text,txtNombreCliente.Text,txtApellidoCliente.Text,txtTelefonoCliente.Text,txtCorreoCliente.Text);
                 string msg = servicioCLiente.Insert(clienteNuevo);
+                groupCliente.Height = 81;
+                MessageBox.Show("Cliente registrado");
             }
             else 
             {
                 MessageBox.Show("Cliente ya registrado");
-            
+                groupCliente.Height = 81;
+
             }
         }
     }

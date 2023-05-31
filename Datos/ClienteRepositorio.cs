@@ -14,6 +14,22 @@ namespace Datos
         {
         }
 
+        public string Insert(Cliente clienteNuevo)
+        {
+            Open();
+            OracleCommand command = new OracleCommand("ingresar_cliente", conexion);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add("v_cedula", OracleType.VarChar).Value = clienteNuevo.cedula;
+            command.Parameters.Add("v_nombres", OracleType.VarChar).Value = clienteNuevo.nombre;
+            command.Parameters.Add("v_apellidos", OracleType.VarChar).Value = clienteNuevo.apellido;
+            command.Parameters.Add("v_celular", OracleType.VarChar).Value = clienteNuevo.telefono;
+            command.Parameters.Add("v_correo", OracleType.VarChar).Value = clienteNuevo.correo;
+
+            int r = command.ExecuteNonQuery();
+            Close();
+            return "1";
+        }
+
         public List<Cliente> ObtenerCLientes()  
         {
 
