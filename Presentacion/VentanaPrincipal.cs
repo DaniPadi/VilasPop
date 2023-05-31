@@ -524,7 +524,7 @@ namespace Presentacion
             labelTotal2.Text = labelTotal.Text;
             tabControl1.SelectedIndex = 5;
             cambio = -total;
-            labelCambio.Text = $"{cambio.ToString()} $";
+            labelCambio.Text = $"{cambio} $";
         }
 
         private void txtDinero_TextChanged(object sender, EventArgs e)
@@ -736,14 +736,19 @@ namespace Presentacion
 
         private bool EsNumero(KeyPressEventArgs e)
         {
-            if ((!char.IsDigit(e.KeyChar)))
-            { 
+            if (!char.IsDigit(e.KeyChar))
+            {
                 e.Handled = true;
-                if (char.IsControl(e.KeyChar))
+                if (e.KeyChar == (char)Keys.Back)
                 {
                     e.Handled = false;
+                    return e.Handled;
                 }
-            } 
+            }
+            else 
+            {
+                e.Handled= false;
+            }
             return e.Handled;
         }
 
