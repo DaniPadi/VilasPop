@@ -489,7 +489,7 @@ namespace Presentacion
 
         private void btnIngresarFactura_Click(object sender, EventArgs e)
         {
-            if (EsNulo(txtProductoFactura.Text))
+            if (!EsNulo(txtProductoFactura.Text))
             {
                 ingresarVenta();
             }
@@ -799,6 +799,22 @@ namespace Presentacion
         private void txtCantidadIngrediente_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = EsNumero(e);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Cliente cliente = servicioCLiente.BuscarCliente(txtCedulaCliente.Text);
+            if (cliente == null)
+            {
+                Cliente clienteNuevo = new Cliente(txtCedulaCliente.Text, txtNombreCliente.Text, txtApellidoCliente.Text, txtTelefonoCliente.Text, txtCorreoCliente.Text);
+                string msg = servicioCLiente.Insert(clienteNuevo);
+                MessageBox.Show("cliente regisrado");
+            }
+            else 
+            {
+
+                MessageBox.Show("cliente ya regisrado");
+            }
         }
     }
 }
