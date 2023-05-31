@@ -171,8 +171,8 @@ namespace Presentacion
         //Materia Prima ----------------------------------------------------------
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            if ((!EsNulo(txtNombreMateriaP.Text)) && (!EsNulo(txtGramosM.Text)) &&(!EsNulo(txtGramosM.Text))
-                && (!EsNulo(txtUnidadesM.Text)) && (!EsNulo(txtCostoM.Text)) && (EsNulo(comboProveedor.Text)) )
+            if ((!EsNulo(txtNombreMateriaP.Text)) && (!EsNulo(txtGramosM.Text))
+                && (!EsNulo(txtUnidadesM.Text)) && (!EsNulo(txtCostoM.Text)) && (comboProveedor.SelectedIndex>0))
             {
                 bool ActualizarMp = false;
                 List<MateriaPrimaDTO> mtDTO = (List<MateriaPrimaDTO>)grillaMateriaP.DataSource;
@@ -866,5 +866,7 @@ namespace Presentacion
             txtMililitrosM.Enabled = radioMililitros.Checked;
             txtUnidadesM.Enabled = radioUnidades.Checked;
         }
+
+        
     }
 }
