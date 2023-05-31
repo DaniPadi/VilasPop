@@ -834,22 +834,27 @@ namespace Presentacion
 
 
 
-        private void button4_Click_1(object sender, EventArgs e)
+        private void btnFacturacion_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 3;
+        }
+
+        private void btnProductos_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedIndex = 1;
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void btnMateriaP_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedIndex = 2;
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void btnFactura_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedIndex = 6;
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void btnProveedores_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedIndex = 4;
         }

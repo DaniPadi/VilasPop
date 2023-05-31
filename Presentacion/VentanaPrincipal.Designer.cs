@@ -31,11 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VentanaPrincipal));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnProveedores = new System.Windows.Forms.Button();
+            this.btnFactura = new System.Windows.Forms.Button();
+            this.btnMateriaP = new System.Windows.Forms.Button();
+            this.btnProductos = new System.Windows.Forms.Button();
+            this.btnFacturacion = new System.Windows.Forms.Button();
             this.label31 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
@@ -191,11 +191,11 @@
             // tabPage1
             // 
             this.tabPage1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tabPage1.BackgroundImage")));
-            this.tabPage1.Controls.Add(this.button7);
-            this.tabPage1.Controls.Add(this.button6);
-            this.tabPage1.Controls.Add(this.button5);
-            this.tabPage1.Controls.Add(this.button4);
-            this.tabPage1.Controls.Add(this.button3);
+            this.tabPage1.Controls.Add(this.btnProveedores);
+            this.tabPage1.Controls.Add(this.btnFactura);
+            this.tabPage1.Controls.Add(this.btnMateriaP);
+            this.tabPage1.Controls.Add(this.btnProductos);
+            this.tabPage1.Controls.Add(this.btnFacturacion);
             this.tabPage1.Controls.Add(this.label31);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -205,65 +205,70 @@
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // button7
+            // btnProveedores
             // 
-            this.button7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button7.BackgroundImage")));
-            this.button7.Font = new System.Drawing.Font("Bauhaus 93", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button7.ForeColor = System.Drawing.Color.CadetBlue;
-            this.button7.Location = new System.Drawing.Point(259, 327);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(180, 27);
-            this.button7.TabIndex = 11;
-            this.button7.Text = "PROVEEDORES";
-            this.button7.UseVisualStyleBackColor = true;
+            this.btnProveedores.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnProveedores.BackgroundImage")));
+            this.btnProveedores.Font = new System.Drawing.Font("Bauhaus 93", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProveedores.ForeColor = System.Drawing.Color.CadetBlue;
+            this.btnProveedores.Location = new System.Drawing.Point(259, 327);
+            this.btnProveedores.Name = "btnProveedores";
+            this.btnProveedores.Size = new System.Drawing.Size(180, 27);
+            this.btnProveedores.TabIndex = 11;
+            this.btnProveedores.Text = "PROVEEDORES";
+            this.btnProveedores.UseVisualStyleBackColor = true;
+            this.btnProveedores.Click += new System.EventHandler(this.btnProveedores_Click);
             // 
-            // button6
+            // btnFactura
             // 
-            this.button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button6.BackgroundImage")));
-            this.button6.Font = new System.Drawing.Font("Bauhaus 93", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.ForeColor = System.Drawing.Color.CadetBlue;
-            this.button6.Location = new System.Drawing.Point(465, 227);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(180, 81);
-            this.button6.TabIndex = 10;
-            this.button6.Text = "FACTURAS";
-            this.button6.UseVisualStyleBackColor = true;
+            this.btnFactura.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFactura.BackgroundImage")));
+            this.btnFactura.Font = new System.Drawing.Font("Bauhaus 93", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFactura.ForeColor = System.Drawing.Color.CadetBlue;
+            this.btnFactura.Location = new System.Drawing.Point(465, 227);
+            this.btnFactura.Name = "btnFactura";
+            this.btnFactura.Size = new System.Drawing.Size(180, 81);
+            this.btnFactura.TabIndex = 10;
+            this.btnFactura.Text = "FACTURAS";
+            this.btnFactura.UseVisualStyleBackColor = true;
+            this.btnFactura.Click += new System.EventHandler(this.btnFactura_Click);
             // 
-            // button5
+            // btnMateriaP
             // 
-            this.button5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button5.BackgroundImage")));
-            this.button5.Font = new System.Drawing.Font("Bauhaus 93", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ForeColor = System.Drawing.Color.CadetBlue;
-            this.button5.Location = new System.Drawing.Point(259, 227);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(180, 81);
-            this.button5.TabIndex = 9;
-            this.button5.Text = "MATERIA PRIMA";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnMateriaP.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMateriaP.BackgroundImage")));
+            this.btnMateriaP.Font = new System.Drawing.Font("Bauhaus 93", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMateriaP.ForeColor = System.Drawing.Color.CadetBlue;
+            this.btnMateriaP.Location = new System.Drawing.Point(259, 227);
+            this.btnMateriaP.Name = "btnMateriaP";
+            this.btnMateriaP.Size = new System.Drawing.Size(180, 81);
+            this.btnMateriaP.TabIndex = 9;
+            this.btnMateriaP.Text = "MATERIA PRIMA";
+            this.btnMateriaP.UseVisualStyleBackColor = true;
+            this.btnMateriaP.Click += new System.EventHandler(this.btnMateriaP_Click);
             // 
-            // button4
+            // btnProductos
             // 
-            this.button4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button4.BackgroundImage")));
-            this.button4.Font = new System.Drawing.Font("Bauhaus 93", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.CadetBlue;
-            this.button4.Location = new System.Drawing.Point(465, 131);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(180, 81);
-            this.button4.TabIndex = 8;
-            this.button4.Text = "PRODUCTOS";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnProductos.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnProductos.BackgroundImage")));
+            this.btnProductos.Font = new System.Drawing.Font("Bauhaus 93", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProductos.ForeColor = System.Drawing.Color.CadetBlue;
+            this.btnProductos.Location = new System.Drawing.Point(465, 131);
+            this.btnProductos.Name = "btnProductos";
+            this.btnProductos.Size = new System.Drawing.Size(180, 81);
+            this.btnProductos.TabIndex = 8;
+            this.btnProductos.Text = "PRODUCTOS";
+            this.btnProductos.UseVisualStyleBackColor = true;
+            this.btnProductos.Click += new System.EventHandler(this.btnProductos_Click);
             // 
-            // button3
+            // btnFacturacion
             // 
-            this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
-            this.button3.Font = new System.Drawing.Font("Bauhaus 93", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.CadetBlue;
-            this.button3.Location = new System.Drawing.Point(259, 131);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(180, 81);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "FACTURACIÓN";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnFacturacion.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFacturacion.BackgroundImage")));
+            this.btnFacturacion.Font = new System.Drawing.Font("Bauhaus 93", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFacturacion.ForeColor = System.Drawing.Color.CadetBlue;
+            this.btnFacturacion.Location = new System.Drawing.Point(259, 131);
+            this.btnFacturacion.Name = "btnFacturacion";
+            this.btnFacturacion.Size = new System.Drawing.Size(180, 81);
+            this.btnFacturacion.TabIndex = 7;
+            this.btnFacturacion.Text = "FACTURACIÓN";
+            this.btnFacturacion.UseVisualStyleBackColor = true;
+            this.btnFacturacion.Click += new System.EventHandler(this.btnFacturacion_Click);
             // 
             // label31
             // 
@@ -272,9 +277,9 @@
             this.label31.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.label31.Location = new System.Drawing.Point(264, 62);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(381, 42);
+            this.label31.Size = new System.Drawing.Size(384, 42);
             this.label31.TabIndex = 6;
-            this.label31.Text = "HELADERÍA VILAS POP";
+            this.label31.Text = "CAFETERÍA VILAS POP";
             // 
             // tabPage2
             // 
@@ -1552,11 +1557,11 @@
         private System.Windows.Forms.Label labelInfo1;
         private System.Windows.Forms.Label labelInfo3;
         private System.Windows.Forms.Button registrarCLiente;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnProveedores;
+        private System.Windows.Forms.Button btnFactura;
+        private System.Windows.Forms.Button btnMateriaP;
+        private System.Windows.Forms.Button btnProductos;
+        private System.Windows.Forms.Button btnFacturacion;
         private System.Windows.Forms.Label label31;
     }
 }
