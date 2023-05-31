@@ -522,6 +522,8 @@ namespace Presentacion
             labelCodigoFactura.Text = CodigoFactura;
             labelTotal2.Text = labelTotal.Text;
             tabControl1.SelectedIndex = 5;
+            cambio = -total;
+            labelCambio.Text = $"{cambio.ToString()} $";
         }
 
         private void txtDinero_TextChanged(object sender, EventArgs e)
@@ -533,21 +535,28 @@ namespace Presentacion
             }
             else
             {
-                cambio = 0;
+                cambio = -total;
             }
             labelCambio.Text = cambio + " $";
         }
 
         private void btnFacturar2_Click(object sender, EventArgs e)
         {
-            if ()
-            Factura factura = new Factura(CodigoFactura,DateTime.Now,total,txtCedulaCliente.Text,"1");
-            string msg = servicioFactura.Insert(factura);
-            int msg2 = servicioVenta.Insert(ventasFacturando);
-            string msg3 = servicioMateriaPrima.Update(materiasPrimasParaActualizar);
-            MessageBox.Show("Factura: " + msg + " vendidos: " + msg2+" actualizados: " + msg3);
-            generarPDF();
-            Limpiar();
+            if (cambio >= 0)
+            {
+                Factura factura = new Factura(CodigoFactura, DateTime.Now, total, txtCedulaCliente.Text, "1");
+                string msg = servicioFactura.Insert(factura);
+                int msg2 = servicioVenta.Insert(ventasFacturando);
+                string msg3 = servicioMateriaPrima.Update(materiasPrimasParaActualizar);
+                MessageBox.Show("Factura: " + msg + " vendidos: " + msg2 + " actualizados: " + msg3);
+                generarPDF();
+                Limpiar();
+            }
+            else
+            {
+                MessageBox.Show("Saldo Insuficiente");
+            }
+            
 
         }
 
@@ -723,16 +732,22 @@ namespace Presentacion
             return false;
         }
 
-        private bool EsNumero(char valor)
+        private bool EsNumero(KeyPressEventArgs e)
         {
-            if (Char.IsDigit(valor))    return true;
-            return false;
-            
+            if ((!char.IsDigit(e.KeyChar)))
+            { 
+                e.Handled = true;
+                if (char.IsControl(e.KeyChar))
+                {
+                    e.Handled = false;
+                }
+            } 
+            return e.Handled;
         }
 
         private void txtDinero_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (char.IsLetter(e.KeyChar)) { e.Handled=true; return; }
+            e.Handled = EsNumero(e);
         }
     }
 }
