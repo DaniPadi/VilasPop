@@ -549,7 +549,6 @@
             this.txtNombreMateriaP.Name = "txtNombreMateriaP";
             this.txtNombreMateriaP.Size = new System.Drawing.Size(308, 22);
             this.txtNombreMateriaP.TabIndex = 12;
-            this.txtNombreMateriaP.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNombreMateriaP_KeyUp);
             // 
             // label21
             // 
@@ -808,7 +807,6 @@
             this.btnEliminar.TabIndex = 8;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // labelSubtotal
             // 

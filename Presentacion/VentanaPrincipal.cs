@@ -521,39 +521,27 @@ namespace Presentacion
             
                 foreach (Ingrediente ingrediente in ingredientesEnProceso)
                 {
-                   
-        
-                for (int i = 0; i < materiasPrimasActuales.Count; i++) 
-                {
-                    if (materiasPrimasActuales[i].idMateriaPrima.Equals(ingrediente.idmateriaPrima))
+                    for (int i = 0; i < materiasPrimasActuales.Count; i++) 
                     {
+                        if (materiasPrimasActuales[i].idMateriaPrima.Equals(ingrediente.idmateriaPrima))
+                        {
 
-                        if (ingrediente.gramos > 0)
-                        {
-                            materiasPrimasActuales[i].gramos = materiasPrimasActuales[i].gramos - (ingrediente.gramos * Int32.Parse(comboCantidad.Text));
+                            if (ingrediente.gramos > 0)
+                            {
+                                materiasPrimasActuales[i].gramos = materiasPrimasActuales[i].gramos - (ingrediente.gramos * Int32.Parse(comboCantidad.Text));
+                            }
+                            else if (ingrediente.mililitros > 0)
+                            {
+                                materiasPrimasActuales[i].mililitros = materiasPrimasActuales[i].mililitros - (ingrediente.mililitros * Int32.Parse(comboCantidad.Text));
+                            }
+                            else
+                            {
+                                materiasPrimasActuales[i].unidades = materiasPrimasActuales[i].unidades - (ingrediente.unidades * Int32.Parse(comboCantidad.Text));
+                            }
+                            materiasPrimasParaActualizar.Add(materiasPrimasActuales[i]);
                         }
-                        else if (ingrediente.mililitros > 0)
-                        {
-                            materiasPrimasActuales[i].mililitros = materiasPrimasActuales[i].mililitros - (ingrediente.mililitros * Int32.Parse(comboCantidad.Text));
-                        }
-                        else
-                        {
-                            materiasPrimasActuales[i].unidades = materiasPrimasActuales[i].unidades - (ingrediente.unidades * Int32.Parse(comboCantidad.Text));
-                        }
-
-                        materiasPrimasParaActualizar.Add(materiasPrimasActuales[i]);
-                       
                     }
-
                 }
-
-                }
-           
-        }
-
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void btnFacturar_Click(object sender, EventArgs e)
@@ -598,16 +586,12 @@ namespace Presentacion
                 {
                     MessageBox.Show("Saldo Insuficiente");
                 }
-
-
-
             }
             else 
             
             {
-                MessageBox.Show("CLiente no registrado");
+                MessageBox.Show("Cliente no registrado");
             }
-
         }
 
         public void LimpiarFactura() 
@@ -716,7 +700,6 @@ namespace Presentacion
                     digitosFecha += caracter;
                 }
             }
-
             return digitosFecha;
         }
         public void generarPDF()
@@ -770,11 +753,6 @@ namespace Presentacion
             // Mostrar un mensaje de éxito
             MessageBox.Show("Archivo PDF generado correctamente.");
 
-        }
-
-        private void txtNombreMateriaP_KeyUp(object sender, KeyEventArgs e)
-        {
-            
         }
         
         private bool EsNulo (string valor)
