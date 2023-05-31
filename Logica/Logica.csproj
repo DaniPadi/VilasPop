@@ -77,11 +77,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClienteServicio.cs" />
+    <Compile Include="EmpleadoServicio.cs" />
     <Compile Include="FacturaServicio.cs" />
     <Compile Include="GastoServicio.cs" />
     <Compile Include="IngredienteServicio.cs" />
     <Compile Include="MateriaPrimaSerivicio.cs" />
-    <Compile Include="procesamientoDeEmpleados.cs" />
     <Compile Include="ProductoServicio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProveedorServicio.cs" />

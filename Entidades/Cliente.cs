@@ -6,19 +6,27 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class Persona
+    public class Cliente
     {
 
 
         public String cedula { get; set; }
         public String nombre { get; set; }
+        public String apellido { get; set; }
         public String telefono { get; set; }
-        public Persona(string cedula, string nombre, string telefono)
+        public String correo { get; set; }
+
+        public Cliente(string cedula, string nombre,string apellido, string telefono, string correo)
         {
             this.cedula = cedula;
             this.nombre = nombre;
+            this.apellido = apellido;
             this.telefono = telefono;
+            this.correo = correo;
         }
 
+        public Cliente()
+        {
+        }
     }
 }

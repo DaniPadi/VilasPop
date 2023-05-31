@@ -108,8 +108,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClienteRepositorio.cs" />
     <Compile Include="ConnectionManager.cs" />
-    <Compile Include="DatosEmpleado.cs" />
+    <Compile Include="EmpleadoRepositorio.cs" />
     <Compile Include="FacturaRepositorio.cs" />
     <Compile Include="GastoRepositorio.cs" />
     <Compile Include="IngredienteRepositorio.cs" />

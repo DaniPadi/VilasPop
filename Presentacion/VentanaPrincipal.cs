@@ -31,6 +31,7 @@ namespace Presentacion
         IngredienteServicio servicioIngrediente = new IngredienteServicio(ConfigConnection.connectionString);
         FacturaServicio servicioFactura = new FacturaServicio(ConfigConnection.connectionString);
         VentaServicio servicioVenta = new VentaServicio(ConfigConnection.connectionString);
+        ClienteServicio servicioCLiente = new ClienteServicio(ConfigConnection.connectionString);
         //Instancias de variables globales
 
         //sección de recetas
@@ -542,6 +543,7 @@ namespace Presentacion
 
         private void btnFacturar2_Click(object sender, EventArgs e)
         {
+           
             if (cambio >= 0)
             {
                 Factura factura = new Factura(CodigoFactura, DateTime.Now, total, txtCedulaCliente.Text, "1");

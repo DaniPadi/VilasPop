@@ -15,16 +15,18 @@ namespace Presentacion
 {
     public partial class InicioDeSesion : Form
     {
-        bool adminMode = true;
+        bool adminMode = false;
         string User ;
         string Password ;
-        Empleado admin = new Empleado("admin","admin","1234","admin","1234");
+     
 
+        EmpleadoServicio servicioEmpleado = new EmpleadoServicio(ConfigConnection.connectionString);
+        VentanaPrincipal formulario2 = new VentanaPrincipal();
         public InicioDeSesion()
         {
             InitializeComponent();
             if (adminMode == true) {
-                VentanaPrincipal formulario2 = new VentanaPrincipal();
+               
 
                 this.Hide();
                 txtPass.Text = "";
@@ -41,58 +43,28 @@ namespace Presentacion
              Password = txtPass.Text;
             if (adminMode)
             {
-                if ((User.Equals(admin.cedula) && adminMode))
-                {
-                    if ((Password.Equals(admin.contrasena) && adminMode))
-                    {
-                        MessageBox.Show("Sesión Iniciada", "Inicio de Sesión", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        VentanaPrincipal formulario2 = new VentanaPrincipal();
-
-                        this.Hide();
-                        txtPass.Text = "";
-                        txtUser.Text = "";
-                        formulario2.ShowDialog();
-                        this.Show();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Contraseña Incorrecta", "Inicio de Sesión", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        txtPass.Text = "";
-                    }
-
-
-                }
-                else
-                {
-                    MessageBox.Show("Usuario no registrado", "Inicio de Sesión", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txtPass.Text = "";
-                    txtUser.Text = "";
-
-                }
-
-
+              
             }
             else 
             {
-                 procesamientoDeEmpleados pe = new procesamientoDeEmpleados();
-                Empleado empleado = pe.VerificarUsuario(User, Password);
-              
-                if (empleado != null)
+                if (servicioEmpleado.iniciarSesion(User, Password))
                 {
                     MessageBox.Show("Sesión Iniciada", "Inicio de Sesión", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    VentanaPrincipal formulario2 = new VentanaPrincipal();
-
                     this.Hide();
                     txtPass.Text = "";
                     txtUser.Text = "";
                     formulario2.ShowDialog();
                     this.Show();
+
                 }
-               
+                else 
+                {
+                    MessageBox.Show("Inicio de Sesión invalido", "Inicio de Sesión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtPass.Text = "";
+                    txtUser.Text = "";
 
-
-
-
+                }
+                
             
             }
 
