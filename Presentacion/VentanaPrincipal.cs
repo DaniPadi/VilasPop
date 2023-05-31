@@ -543,7 +543,7 @@ namespace Presentacion
 
         private void btnFacturar2_Click(object sender, EventArgs e)
         {
-           
+            Cliente cliente = servicioCLiente.BuscarCliente(txtCedulaCliente.Text);
             if (cambio >= 0)
             {
                 Factura factura = new Factura(CodigoFactura, DateTime.Now, total, txtCedulaCliente.Text, "1");
@@ -755,6 +755,21 @@ namespace Presentacion
         private void txtDinero_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = EsNumero(e);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Cliente cliente = servicioCLiente.BuscarCliente(txtCedulaCliente.Text);
+            if (cliente == null)
+            {
+                Cliente clienteNuevo = new Cliente(txtCedulaCliente.Text,txtNombreCliente.Text,txtApellidoCliente.Text,txtTelefonoCliente.Text,txtCorreoCliente.Text);
+                string msg = servicioCLiente.Insert(clienteNuevo);
+            }
+            else 
+            {
+                MessageBox.Show("Cliente ya registrado");
+            
+            }
         }
     }
 }

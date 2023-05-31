@@ -17,6 +17,11 @@ namespace Logica
             this.clienteServicio = new ClienteRepositorio(ConnectionString);
         }
 
+        public Cliente BuscarCliente(string text)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Cliente> ObtenerCLientes()
         {
             return clienteServicio.ObtenerCLientes();
