@@ -488,7 +488,7 @@ namespace Presentacion
 
         private void btnIngresarFactura_Click(object sender, EventArgs e)
         {
-            if (EsNulo(txtProductoFactura.Text))
+            if (!EsNulo(txtProductoFactura.Text))
             {
                 ingresarVenta();
             }
@@ -791,7 +791,7 @@ namespace Presentacion
 
         private void txtPrecioProductoR_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
+            e.Handled = EsNumero(e);
         }
 
         private void button3_Click(object sender, EventArgs e)
