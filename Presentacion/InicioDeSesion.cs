@@ -26,7 +26,6 @@ namespace Presentacion
         {
             InitializeComponent();
             if (adminMode == true) {
-               
 
                 this.Hide();
                 txtPass.Text = "";
@@ -63,17 +62,8 @@ namespace Presentacion
                     txtPass.Text = "";
                     txtUser.Text = "";
 
-                }
-                
-            
+                } 
             }
-
-
-
-
-
-
-
         }
 
         private void InicioDeSesion_KeyDown(object sender, KeyEventArgs e)
