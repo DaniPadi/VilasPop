@@ -857,5 +857,15 @@ namespace Presentacion
         {
             tabControl1.SelectedIndex = 4;
         }
+
+        private void radioGramos_CheckedChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void DesactivarCamposRadioButton(TextBox CampoNoSeleccionado)
+        {
+            CampoNoSeleccionado.Enabled = false;
+        }
     }
 }
