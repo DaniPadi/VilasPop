@@ -19,6 +19,7 @@ namespace Logica
 
         public string Insert(Factura factura) 
         {
+            Console.WriteLine("Estoy aquí");
             return facturaRepositorio.Insert(factura);
         }
 

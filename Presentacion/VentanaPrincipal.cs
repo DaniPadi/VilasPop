@@ -44,7 +44,7 @@ namespace Presentacion
         float subTotal = 0;
         float total = 0;
         float dineroDado = 0;
-        float cambio = 0;
+        float cambio = 0F;
         List<Venta> ventasFacturando = new List<Venta>();
         string CodigoFactura = null;
         List<MateriaPrima> materiasPrimasActuales = new List<MateriaPrima>();
@@ -526,13 +526,21 @@ namespace Presentacion
 
         private void txtDinero_TextChanged(object sender, EventArgs e)
         {
-            dineroDado = float.Parse(txtDinero.Text);
-            cambio = dineroDado - total;
-            labelCambio.Text = cambio + " $"; 
+            if (!EsNulo(txtDinero.Text))
+            {
+                dineroDado = float.Parse(txtDinero.Text);
+                cambio = dineroDado - total;
+            }
+            else
+            {
+                cambio = 0;
+            }
+            labelCambio.Text = cambio + " $";
         }
 
         private void btnFacturar2_Click(object sender, EventArgs e)
         {
+            if ()
             Factura factura = new Factura(CodigoFactura,DateTime.Now,total,txtCedulaCliente.Text,"1");
             string msg = servicioFactura.Insert(factura);
             int msg2 = servicioVenta.Insert(ventasFacturando);
@@ -622,8 +630,8 @@ namespace Presentacion
                 grillaVendidos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                
                 labelInfo1.Text = "Código Factura: " + facturaselected.id_factura;
-                labelInfo2.Text = "Dinero ingresado: " + facturaselected.precioTotal + " $";
-                labelInfo3.Text = "CLiente: " + facturaselected.IdCliente;
+                labelInfo2.Text = $"Dinero ingresado: {facturaselected.precioTotal} $";
+                labelInfo3.Text = "Cliente: " + facturaselected.IdCliente;
             }
                 
 
@@ -707,6 +715,24 @@ namespace Presentacion
         private void txtNombreMateriaP_KeyUp(object sender, KeyEventArgs e)
         {
             
+        }
+        
+        private bool EsNulo (string valor)
+        {
+            if ((valor == null) || (valor == "")) return true;
+            return false;
+        }
+
+        private bool EsNumero(char valor)
+        {
+            if (Char.IsDigit(valor))    return true;
+            return false;
+            
+        }
+
+        private void txtDinero_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsLetter(e.KeyChar)) { e.Handled=true; return; }
         }
     }
 }
