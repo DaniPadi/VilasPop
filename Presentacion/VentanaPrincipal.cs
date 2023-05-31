@@ -791,7 +791,7 @@ namespace Presentacion
 
         private void txtPrecioProductoR_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled =EsNumero(e);
+            
         }
     }
 }
