@@ -192,8 +192,6 @@ namespace Presentacion
                 if (ActualizarMp)
                 {
                     reEnfocarProductos(Int32.Parse(txtIdMateriaPrima.Text), idViejo);
-
-
                 }
             }
             else
@@ -210,8 +208,6 @@ namespace Presentacion
 
         public void ingresarMateriaPrima() 
         {
-
-
             //Ingresamos la materia prima
 
             string idMateriaP = txtIdMateriaPrima.Text;
@@ -234,7 +230,6 @@ namespace Presentacion
             MateriaPrima materiaP = new MateriaPrima(idMateriaP, NombreMP, FechaCaducidad, Unidades, Mililitros, Gramos);
             var msg = servicioMateriaPrima.Insert(materiaP);
 
-
             //Registrados un gasto 
 
             DateTime fechaActual = DateTime.Now;
@@ -249,7 +244,6 @@ namespace Presentacion
             else if (radioMililitros.Checked)
             {
                 costo = float.Parse(txtCostoM.Text) * Mililitros;
-
             }
             else 
             {
