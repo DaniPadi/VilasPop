@@ -211,6 +211,7 @@ namespace Presentacion
         public void ingresarMateriaPrima() 
         {
 
+
             //Ingresamos la materia prima
 
             string idMateriaP = txtIdMateriaPrima.Text;
