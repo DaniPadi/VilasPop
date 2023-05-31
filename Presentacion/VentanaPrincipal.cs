@@ -31,7 +31,6 @@ namespace Presentacion
         IngredienteServicio servicioIngrediente = new IngredienteServicio(ConfigConnection.connectionString);
         FacturaServicio servicioFactura = new FacturaServicio(ConfigConnection.connectionString);
         VentaServicio servicioVenta = new VentaServicio(ConfigConnection.connectionString);
-        ClienteServicio servicioCLiente = new ClienteServicio(ConfigConnection.connectionString);
         //Instancias de variables globales
 
         //sección de recetas
@@ -489,7 +488,7 @@ namespace Presentacion
 
         private void btnIngresarFactura_Click(object sender, EventArgs e)
         {
-            if (!EsNulo(txtProductoFactura.Text))
+            if (EsNulo(txtProductoFactura.Text))
             {
                 ingresarVenta();
             }
@@ -572,32 +571,21 @@ namespace Presentacion
 
         private void btnFacturar2_Click(object sender, EventArgs e)
         {
-            Cliente cliente = servicioCLiente.BuscarCliente(txtCedulaCliente.Text);
-            if (cliente != null) 
+            if (cambio >= 0)
             {
-                if (cambio >= 0)
-                {
-                    Factura factura = new Factura(CodigoFactura, DateTime.Now, total, cliente.cedula, "1");
-                    string msg = servicioFactura.Insert(factura);
-                    int msg2 = servicioVenta.Insert(ventasFacturando);
-                    string msg3 = servicioMateriaPrima.Update(materiasPrimasParaActualizar);
-                    MessageBox.Show("Factura: " + msg + " vendidos: " + msg2 + " actualizados: " + msg3);
-                    generarPDF();
-                    Limpiar();
-                }
-                else
-                {
-                    MessageBox.Show("Saldo Insuficiente");
-                }
-
-
+                Factura factura = new Factura(CodigoFactura, DateTime.Now, total, txtCedulaCliente.Text, "1");
+                string msg = servicioFactura.Insert(factura);
+                int msg2 = servicioVenta.Insert(ventasFacturando);
+                string msg3 = servicioMateriaPrima.Update(materiasPrimasParaActualizar);
+                MessageBox.Show("Factura: " + msg + " vendidos: " + msg2 + " actualizados: " + msg3);
+                generarPDF();
+                Limpiar();
             }
-            else 
+            else
             {
-
-                MessageBox.Show("Cliente no registrado");
+                MessageBox.Show("Saldo Insuficiente");
             }
-
+            
 
         }
 
@@ -801,20 +789,9 @@ namespace Presentacion
             e.Handled = EsNumero(e);
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void txtPrecioProductoR_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Cliente cliente = servicioCLiente.BuscarCliente(txtCedulaCliente.Text);
-            if (cliente == null)
-            {
-                Cliente clienteNuevo = new Cliente(txtCedulaCliente.Text, txtNombreCliente.Text, txtApellidoCliente.Text, txtTelefonoCliente.Text, txtCorreoCliente.Text);
-                string msg = servicioCLiente.Insert(clienteNuevo);
-                MessageBox.Show("cliente regisrado");
-            }
-            else 
-            {
-
-                MessageBox.Show("cliente ya regisrado");
-            }
+            
         }
     }
 }
