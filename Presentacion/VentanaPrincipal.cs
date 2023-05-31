@@ -592,7 +592,7 @@ namespace Presentacion
                     string msg3 = servicioMateriaPrima.Update(materiasPrimasParaActualizar);
                     MessageBox.Show("Factura: " + msg + " vendidos: " + msg2 + " actualizados: " + msg3);
                     generarPDF();
-                    Limpiar();
+                    LimpiarFactura();
                 }
                 else
                 {
@@ -610,7 +610,7 @@ namespace Presentacion
 
         }
 
-        public void Limpiar() 
+        public void LimpiarFactura() 
         {
 
              productoSeleccionado = new ProductoDTO();
@@ -626,7 +626,7 @@ namespace Presentacion
             listaFactura.Items.Clear();
             cargarProductosVenta();
             txtProductoFactura.Text = "";
-            tabControl1.SelectedIndex = 1;
+            tabControl1.SelectedIndex = 3;
         }
 
         private void desplegar_Click(object sender, EventArgs e)
