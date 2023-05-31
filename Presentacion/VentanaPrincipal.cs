@@ -74,114 +74,131 @@ namespace Presentacion
 
         private void btnEmpezarReceta_Click(object sender, EventArgs e)
         {
-            if (!creandoReceta)
+            if (!EsNulo(txtPrecioProductoR.Text) && (!EsNulo(txtnombreProducto.Text)))
             {
-                
-                creandoReceta = true;
-                groupIngredientes.Enabled = true;
-                btnEmpezarReceta.Text = "Finalizar";
-                txtnombreProducto.Enabled= false;
-                txtPrecioProductoR.Enabled= false;
-                ProductoEnProceso = txtnombreProducto.Text;
-                PrecioProductoEnProceso = txtPrecioProductoR.Text;
-
-
-            }
-            else {
-              
-                DialogResult result = MessageBox.Show("¿Desea finalizar la receta?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (result == DialogResult.Yes)
+                if (!creandoReceta)
                 {
-                    btnEmpezarReceta.Text = "Empezar";
-                    creandoReceta = false;
-                    groupIngredientes.Enabled = false;
-                    txtnombreProducto.Enabled = true;
 
-                    //Ingreso de Producto
+                    creandoReceta = true;
+                    groupIngredientes.Enabled = true;
+                    btnEmpezarReceta.Text = "Finalizar";
+                    txtnombreProducto.Enabled = false;
+                    txtPrecioProductoR.Enabled = false;
+                    ProductoEnProceso = txtnombreProducto.Text;
+                    PrecioProductoEnProceso = txtPrecioProductoR.Text;
 
-                    string idProducto = servicioProducto.obtenerSiguienteID();
-                    Producto producto = new Producto(idProducto, ProductoEnProceso, float.Parse(PrecioProductoEnProceso));
-                    string resultado = servicioProducto.Insert(producto);
 
-                    //Ingreso de Receta
+                }
+                else
+                {
 
-                    string idReceta = servicioReceta.obtenerSiguienteID();
-                    Receta receta = new Receta(idReceta, ProductoEnProceso, idProducto, txtDescripcion.Text);
-                    string resultado2 = servicioReceta.Insert(receta);
+                    DialogResult result = MessageBox.Show("¿Desea finalizar la receta?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                    //Ingreso de ingredientes
-                    List<Ingrediente> ingredientes = new List<Ingrediente>();
-                    foreach (IngredientesEnEspera ingr in ingredientesProceso) 
+                    if (result == DialogResult.Yes)
                     {
+                        btnEmpezarReceta.Text = "Empezar";
+                        creandoReceta = false;
+                        groupIngredientes.Enabled = false;
+                        txtnombreProducto.Enabled = true;
 
-                        Ingrediente ingrediente = new Ingrediente();
-                        ingrediente.idmateriaPrima = ingr.materiaP.idMateriaPrima;
-                        ingrediente.idReceta = idReceta;
+                        //Ingreso de Producto
 
-                        if (ingr.unidad.Equals("gr"))
+                        string idProducto = servicioProducto.obtenerSiguienteID();
+                        Producto producto = new Producto(idProducto, ProductoEnProceso, float.Parse(PrecioProductoEnProceso));
+                        string resultado = servicioProducto.Insert(producto);
+
+                        //Ingreso de Receta
+
+                        string idReceta = servicioReceta.obtenerSiguienteID();
+                        Receta receta = new Receta(idReceta, ProductoEnProceso, idProducto, txtDescripcion.Text);
+                        string resultado2 = servicioReceta.Insert(receta);
+
+                        //Ingreso de ingredientes
+                        List<Ingrediente> ingredientes = new List<Ingrediente>();
+                        foreach (IngredientesEnEspera ingr in ingredientesProceso)
                         {
-                            ingrediente.gramos = float.Parse(ingr.cantidad);
-                            ingrediente.unidades = 0;
-                            ingrediente.mililitros = 0;
-                        }
-                        else if (ingr.unidad.Equals("ml"))
-                        {
-                            ingrediente.gramos = 0;
-                            ingrediente.unidades = 0;
-                            ingrediente.mililitros = float.Parse(ingr.cantidad);
-                        }
-                        else 
-                        {
-                            ingrediente.gramos = 0;
-                            ingrediente.unidades = Int32.Parse(ingr.cantidad);
-                            ingrediente.mililitros = 0;
+
+                            Ingrediente ingrediente = new Ingrediente();
+                            ingrediente.idmateriaPrima = ingr.materiaP.idMateriaPrima;
+                            ingrediente.idReceta = idReceta;
+
+                            if (ingr.unidad.Equals("gr"))
+                            {
+                                ingrediente.gramos = float.Parse(ingr.cantidad);
+                                ingrediente.unidades = 0;
+                                ingrediente.mililitros = 0;
+                            }
+                            else if (ingr.unidad.Equals("ml"))
+                            {
+                                ingrediente.gramos = 0;
+                                ingrediente.unidades = 0;
+                                ingrediente.mililitros = float.Parse(ingr.cantidad);
+                            }
+                            else
+                            {
+                                ingrediente.gramos = 0;
+                                ingrediente.unidades = Int32.Parse(ingr.cantidad);
+                                ingrediente.mililitros = 0;
+
+                            }
+
+                            ingredientes.Add(ingrediente);
 
                         }
 
-                        ingredientes.Add(ingrediente);
+
+                        string resultado3 = servicioIngrediente.Insert(ingredientes);
+
+                        MessageBox.Show("Productos: " + resultado + " Receta: " + resultado2 + " Ingredientes: " + resultado3);
+                        cargarComboIngredientes();
+                        cargarProductosVenta();
+
+                    }
+                    else if (result == DialogResult.No)
+                    {
 
                     }
 
-
-                    string resultado3 = servicioIngrediente.Insert(ingredientes);
-
-                    MessageBox.Show("Productos: " + resultado + " Receta: " + resultado2 + " Ingredientes: " + resultado3);
-                    cargarComboIngredientes();
-                    cargarProductosVenta();
-
                 }
-                else if (result == DialogResult.No)
-                {
-                  
-                }
-             
             }
+            else
+            {
+                MessageBox.Show("Campo Nombre del producto o Precio inválido");
+            }
+            
         }
 
         //Materia Prima ----------------------------------------------------------
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            bool ActualizarMp = false;
-            List<MateriaPrimaDTO> mtDTO = (List<MateriaPrimaDTO>)grillaMateriaP.DataSource;
-            int idViejo = 0;
-            foreach (MateriaPrimaDTO materia in mtDTO)
+            if ((!EsNulo(txtNombreMateriaP.Text)) && (!EsNulo(txtGramosM.Text)) &&(!EsNulo(txtGramosM.Text))
+                && (!EsNulo(txtUnidadesM.Text)) && (!EsNulo(txtCostoM.Text)))
             {
-                if (txtNombreMateriaP.Text.Equals(materia.NOMBRE))
+                bool ActualizarMp = false;
+                List<MateriaPrimaDTO> mtDTO = (List<MateriaPrimaDTO>)grillaMateriaP.DataSource;
+                int idViejo = 0;
+                foreach (MateriaPrimaDTO materia in mtDTO)
                 {
-                    Console.WriteLine(materia.NOMBRE);
-                    ActualizarMp = true;
-                    idViejo = Int32.Parse(materia.ID);
-                    
+                    if (txtNombreMateriaP.Text.Equals(materia.NOMBRE))
+                    {
+                        Console.WriteLine(materia.NOMBRE);
+                        ActualizarMp = true;
+                        idViejo = Int32.Parse(materia.ID);
+
+                    }
+                }
+                Console.WriteLine(idViejo);
+                ingresarMateriaPrima();
+                if (ActualizarMp)
+                {
+                    reEnfocarProductos(Int32.Parse(txtIdMateriaPrima.Text), idViejo);
+
+
                 }
             }
-            Console.WriteLine(idViejo);
-            ingresarMateriaPrima();
-            if (ActualizarMp) 
+            else
             {
-                reEnfocarProductos(Int32.Parse(txtIdMateriaPrima.Text), idViejo);
-                
-            
+                MessageBox.Show("Digite toda la información");
             }
 
         }
@@ -324,9 +341,14 @@ namespace Presentacion
 
         private void btnIngresarIngrediente_Click(object sender, EventArgs e)
         {
-
-            agregarIngrediente();
-
+            if ((!EsNulo(txtCantidadIngrediente.Text)) && (!EsNulo(txtDescripcion.Text)))
+            {
+                agregarIngrediente();
+            }
+            else
+            {
+                MessageBox.Show("Campo Cantidad o Descripción Inválido");
+            }
         }
 
         private void agregarIngrediente()
@@ -466,9 +488,15 @@ namespace Presentacion
 
         private void btnIngresarFactura_Click(object sender, EventArgs e)
         {
+            if (EsNulo(txtProductoFactura.Text))
+            {
+                ingresarVenta();
+            }
+            else
+            {
+                MessageBox.Show("Elija un producto");
+            }
             
-           
-            ingresarVenta();
         }
 
         public void ingresarVenta() 
@@ -767,22 +795,9 @@ namespace Presentacion
             e.Handled = EsNumero(e);
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void txtCantidadIngrediente_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Cliente cliente = servicioCLiente.BuscarCliente(txtCedulaCliente.Text);
-            if (cliente == null)
-            {
-                Cliente clienteNuevo = new Cliente(txtCedulaCliente.Text,txtNombreCliente.Text,txtApellidoCliente.Text,txtTelefonoCliente.Text,txtCorreoCliente.Text);
-                string msg = servicioCLiente.Insert(clienteNuevo);
-                groupCliente.Height = 81;
-                MessageBox.Show("Cliente registrado");
-            }
-            else 
-            {
-                MessageBox.Show("Cliente ya registrado");
-                groupCliente.Height = 81;
-
-            }
+            e.Handled = EsNumero(e);
         }
     }
 }
