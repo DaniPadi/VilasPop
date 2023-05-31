@@ -172,7 +172,7 @@ namespace Presentacion
         private void btnIngresar_Click(object sender, EventArgs e)
         {
             if ((!EsNulo(txtNombreMateriaP.Text)) && (!EsNulo(txtGramosM.Text)) &&(!EsNulo(txtGramosM.Text))
-                && (!EsNulo(txtUnidadesM.Text)) && (!EsNulo(txtCostoM.Text)))
+                && (!EsNulo(txtUnidadesM.Text)) && (!EsNulo(txtCostoM.Text)) && (EsNulo(comboProveedor.Text)) )
             {
                 bool ActualizarMp = false;
                 List<MateriaPrimaDTO> mtDTO = (List<MateriaPrimaDTO>)grillaMateriaP.DataSource;
@@ -275,8 +275,17 @@ namespace Presentacion
         //Proveedor --------------------------------------------------------------
         private void btnIngresarProveedor_Click(object sender, EventArgs e)
         {
-            GuardarProveedor();
-            CargarProveedores();
+            if ( (!EsNulo(txtIdProveedor.Text)) && (!EsNulo(txtNombreProveedor.Text)) && (!EsNulo(txtCorreoProveedor.Text)) &&
+                (!EsNulo(txtTelefonoProveedor.Text)))
+            {
+                GuardarProveedor();
+                CargarProveedores();
+            }
+            else
+            {
+                MessageBox.Show("Dejo un campo vacío");
+            }
+            
         }
         private void CargarProveedores()
         {
@@ -864,24 +873,6 @@ namespace Presentacion
             txtGramosM.Enabled = radioGramos.Checked;
             txtMililitrosM.Enabled = radioMililitros.Checked;
             txtUnidadesM.Enabled = radioUnidades.Checked;
-            //if (radioGramos.Checked)
-            //{
-                
-            //    DesactivarCamposRadioButton(txtMililitrosM);
-            //    DesactivarCamposRadioButton(txtUnidadesM);
-            //}
-        }
-
-
-        private void DesactivarCamposRadioButton(TextBox CampoNoSeleccionado)
-        {
-            CampoNoSeleccionado.Enabled = false;
-            CampoNoSeleccionado.Text = string.Empty;
-        }
-
-        private void groupBox4_Enter(object sender, EventArgs e)
-        {
-
         }
 
         private void radioMililitros_CheckedChanged(object sender, EventArgs e)
