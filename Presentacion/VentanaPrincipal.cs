@@ -833,10 +833,6 @@ namespace Presentacion
         }
 
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectedIndex = 3;
-        }
 
         private void button4_Click_1(object sender, EventArgs e)
         {
