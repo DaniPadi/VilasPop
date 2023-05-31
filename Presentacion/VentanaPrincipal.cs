@@ -861,12 +861,41 @@ namespace Presentacion
 
         private void radioGramos_CheckedChanged(object sender, EventArgs e)
         {
-           
+            txtGramosM.Enabled = radioGramos.Checked;
+            txtMililitrosM.Enabled = radioMililitros.Checked;
+            txtUnidadesM.Enabled = radioUnidades.Checked;
+            //if (radioGramos.Checked)
+            //{
+                
+            //    DesactivarCamposRadioButton(txtMililitrosM);
+            //    DesactivarCamposRadioButton(txtUnidadesM);
+            //}
         }
+
 
         private void DesactivarCamposRadioButton(TextBox CampoNoSeleccionado)
         {
             CampoNoSeleccionado.Enabled = false;
+            CampoNoSeleccionado.Text = string.Empty;
+        }
+
+        private void groupBox4_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioMililitros_CheckedChanged(object sender, EventArgs e)
+        {
+            txtGramosM.Enabled = radioGramos.Checked;
+            txtMililitrosM.Enabled = radioMililitros.Checked;
+            txtUnidadesM.Enabled = radioUnidades.Checked;
+        }
+
+        private void radioUnidades_CheckedChanged(object sender, EventArgs e)
+        {
+            txtGramosM.Enabled = radioGramos.Checked;
+            txtMililitrosM.Enabled = radioMililitros.Checked;
+            txtUnidadesM.Enabled = radioUnidades.Checked;
         }
     }
 }
