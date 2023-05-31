@@ -170,26 +170,34 @@ namespace Presentacion
         //Materia Prima ----------------------------------------------------------
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            bool ActualizarMp = false;
-            List<MateriaPrimaDTO> mtDTO = (List<MateriaPrimaDTO>)grillaMateriaP.DataSource;
-            int idViejo = 0;
-            foreach (MateriaPrimaDTO materia in mtDTO)
+            if ((!EsNulo(txtNombreMateriaP.Text)) && (!EsNulo(txtGramosM.Text)) &&(!EsNulo(txtGramosM.Text))
+                && (!EsNulo(txtUnidadesM.Text)) && (!EsNulo(txtCostoM.Text)))
             {
-                if (txtNombreMateriaP.Text.Equals(materia.NOMBRE))
+                bool ActualizarMp = false;
+                List<MateriaPrimaDTO> mtDTO = (List<MateriaPrimaDTO>)grillaMateriaP.DataSource;
+                int idViejo = 0;
+                foreach (MateriaPrimaDTO materia in mtDTO)
                 {
-                    Console.WriteLine(materia.NOMBRE);
-                    ActualizarMp = true;
-                    idViejo = Int32.Parse(materia.ID);
-                    
+                    if (txtNombreMateriaP.Text.Equals(materia.NOMBRE))
+                    {
+                        Console.WriteLine(materia.NOMBRE);
+                        ActualizarMp = true;
+                        idViejo = Int32.Parse(materia.ID);
+
+                    }
+                }
+                Console.WriteLine(idViejo);
+                ingresarMateriaPrima();
+                if (ActualizarMp)
+                {
+                    reEnfocarProductos(Int32.Parse(txtIdMateriaPrima.Text), idViejo);
+
+
                 }
             }
-            Console.WriteLine(idViejo);
-            ingresarMateriaPrima();
-            if (ActualizarMp) 
+            else
             {
-                reEnfocarProductos(Int32.Parse(txtIdMateriaPrima.Text), idViejo);
-                
-            
+                MessageBox.Show("Digite toda la información");
             }
 
         }
