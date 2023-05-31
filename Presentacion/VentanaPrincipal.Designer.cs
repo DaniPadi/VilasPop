@@ -420,6 +420,7 @@
             this.txtNombreMateriaP.Name = "txtNombreMateriaP";
             this.txtNombreMateriaP.Size = new System.Drawing.Size(232, 20);
             this.txtNombreMateriaP.TabIndex = 12;
+            this.txtNombreMateriaP.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNombreMateriaP_KeyUp);
             // 
             // label21
             // 

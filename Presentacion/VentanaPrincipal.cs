@@ -161,9 +161,35 @@ namespace Presentacion
         //Materia Prima ----------------------------------------------------------
         private void btnIngresar_Click(object sender, EventArgs e)
         {
+            bool ActualizarMp = false;
+            List<MateriaPrimaDTO> mtDTO = (List<MateriaPrimaDTO>)grillaMateriaP.DataSource;
+            int receta = 0;
+            foreach (MateriaPrimaDTO materia in mtDTO)
+            {
+                if (txtNombreMateriaP.Text.Equals(materia.NOMBRE))
+                {
+                    Console.WriteLine(materia.NOMBRE);
+                    ActualizarMp = true;
+                  
+                    return;
+                }
+            }
+
             ingresarMateriaPrima();
+            if (ActualizarMp) 
+            {
+
+                
+            
+            }
 
         }
+
+        private void reEnfocarProductos(int idMateria, int idReceta)
+        {
+            
+        }
+
         public void ingresarMateriaPrima() 
         {
 
@@ -513,8 +539,27 @@ namespace Presentacion
             string msg3 = servicioMateriaPrima.Update(materiasPrimasParaActualizar);
             MessageBox.Show("Factura: " + msg + " vendidos: " + msg2+" actualizados: " + msg3);
             generarPDF();
-            
+            Limpiar();
 
+        }
+
+        public void Limpiar() 
+        {
+
+             productoSeleccionado = new ProductoDTO();
+             subTotal = 0;
+             total = 0;
+            dineroDado = 0;
+             cambio = 0;
+           ventasFacturando = new List<Venta>();
+            CodigoFactura = null;
+             materiasPrimasActuales = new List<MateriaPrima>();
+             ingredientesEnProceso = new List<Ingrediente>();
+             materiasPrimasParaActualizar = new List<MateriaPrima>();
+            listaFactura.Items.Clear();
+            cargarProductosVenta();
+            txtProductoFactura.Text = "";
+            tabControl1.SelectedIndex = 1;
         }
 
         private void desplegar_Click(object sender, EventArgs e)
@@ -617,10 +662,23 @@ namespace Presentacion
             PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(filePath, FileMode.Create));
 
             document.Open();
+            // Información adicional
+            Paragraph infoParagraph = new Paragraph();
+            infoParagraph.Alignment = Element.ALIGN_CENTER;
+
+            infoParagraph.Add(new Chunk("VILAS POP FACTURA"));
+            infoParagraph.Add(Chunk.NEWLINE);
+
+            infoParagraph.Add(new Chunk("Dirección: Calle 18Abis #35-55, Valledupar"));
+            infoParagraph.Add(Chunk.NEWLINE);
+            infoParagraph.Add(new Chunk("Número de factura: " + CodigoFactura));
+            infoParagraph.Add(Chunk.NEWLINE);
+            infoParagraph.Add(Chunk.NEWLINE);
+            document.Add(infoParagraph);
 
 
             Paragraph paragraph = new Paragraph();
-
+            paragraph.Alignment = Element.ALIGN_RIGHT;
             foreach (var item in listaFactura.Items)
             {
                 paragraph.Add(new Chunk(item.ToString()));
@@ -629,6 +687,14 @@ namespace Presentacion
 
             // Agregar el párrafo al documento
             document.Add(paragraph);
+            Paragraph moneyParagraph = new Paragraph();
+            moneyParagraph.Alignment = Element.ALIGN_RIGHT;
+            moneyParagraph.Add(Chunk.NEWLINE);
+            moneyParagraph.Add(new Chunk("Dinero recibido: " + txtDinero.Text + " $"));
+            moneyParagraph.Add(Chunk.NEWLINE);
+            moneyParagraph.Add(new Chunk("Cambio entregado: " + labelCambio.Text));
+
+            document.Add(moneyParagraph);
 
             // Cerrar el documento
             document.Close();
@@ -636,6 +702,11 @@ namespace Presentacion
             // Mostrar un mensaje de éxito
             MessageBox.Show("Archivo PDF generado correctamente.");
 
+        }
+
+        private void txtNombreMateriaP_KeyUp(object sender, KeyEventArgs e)
+        {
+            
         }
     }
 }

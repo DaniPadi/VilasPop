@@ -72,5 +72,22 @@ namespace Datos
             return ingredientes;
 
         }
+
+        public int reEnfocarProductos(int idMateria, int idReceta) 
+        {
+            Open();
+            OracleCommand command = new OracleCommand("reemplazar_materiaprima", conexion);
+            command.CommandType = CommandType.StoredProcedure;
+
+            // Agregar los parámetros de entrada
+            command.Parameters.Add("p_id_materiap_new", OracleType.Number).Value = idMateria;
+            command.Parameters.Add("p_id_receta", OracleType.Number).Value = idReceta;
+
+            // Ejecutar el procedimiento almacenado
+            int r = command.ExecuteNonQuery();
+            Close();
+
+            return r;
+        }
     }
 }

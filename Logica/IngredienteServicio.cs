@@ -37,6 +37,12 @@ namespace Logica
             return ingredienteRepositorio.obtenerIngredientesPorReceta(receta);
         }
 
+        public int reEnfocarProductos(int idNuevo, int idViejo) 
+        {
+
+            return ingredienteRepositorio.reEnfocarProductos(idNuevo, idViejo);
+        }
+
 
     }
 }
