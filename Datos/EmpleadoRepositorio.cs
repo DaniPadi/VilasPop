@@ -14,6 +14,19 @@ namespace Datos
         {
         }
 
+        public string EnviarRegistro(string user, DateTime actual)
+        {
+            Open();
+            OracleCommand command = new OracleCommand("InsertarRegistroIngreso", conexion);
+            command.CommandType = CommandType.StoredProcedure;
+
+            command.Parameters.Add("v_cedula", OracleType.VarChar).Value = user;
+            command.Parameters.Add("v_fechaIngreso", OracleType.DateTime).Value = actual;
+            int r = command.ExecuteNonQuery();
+            Close();
+            return r + "";
+        }
+
         public int IniciarSesion(string usuario, string contraseña) 
         {
             Open();

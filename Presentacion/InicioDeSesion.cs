@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entidades;
 using Logica;
-
+using Org.BouncyCastle.Asn1.Crmf;
 
 namespace Presentacion
 {
     public partial class InicioDeSesion : Form
     {
-        bool adminMode = true;
+        bool adminMode = false;
         string User ;
         string Password ;
      
@@ -48,6 +48,9 @@ namespace Presentacion
             {
                 if (servicioEmpleado.iniciarSesion(User, Password))
                 {
+                    DateTime actual = DateTime.Now;
+                    string msg = servicioEmpleado.EnviarRegistro(User, actual);
+                    Console.WriteLine(msg);
                     MessageBox.Show("Sesión Iniciada", "Inicio de Sesión", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Hide();
                     txtPass.Text = "";

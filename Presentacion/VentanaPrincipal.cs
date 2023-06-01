@@ -152,6 +152,15 @@ namespace Presentacion
                         MessageBox.Show("Productos: " + resultado + " Receta: " + resultado2 + " Ingredientes: " + resultado3);
                         cargarComboIngredientes();
                         cargarProductosVenta();
+                        txtnombreProducto.Text = "";
+                        txtPrecioProductoR.Text = "";
+                        txtDescripcion.Text = "";
+                         creandoReceta = false;
+                         ProductoEnProceso = "";
+                        PrecioProductoEnProceso = "";
+                        ingredientesProceso = new List<IngredientesEnEspera>();
+                        listaIngredientesR.Items.Clear();
+
 
                     }
                     else if (result == DialogResult.No)
@@ -896,6 +905,37 @@ namespace Presentacion
             txtGramosM.Enabled = radioGramos.Checked;
             txtMililitrosM.Enabled = radioMililitros.Checked;
             txtUnidadesM.Enabled = radioUnidades.Checked;
+        }
+
+        public void Regresar() 
+        {
+            tabControl1.SelectedIndex = 0;
+
+        }
+
+        private void btnRegresar5_Click(object sender, EventArgs e)
+        {
+            Regresar();
+        }
+
+        private void btnRegresar4_Click(object sender, EventArgs e)
+        {
+            Regresar();
+        }
+
+        private void btnRegresar3_Click(object sender, EventArgs e)
+        {
+            Regresar();
+        }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            Regresar();
+        }
+
+        private void btnRegresar2_Click(object sender, EventArgs e)
+        {
+            Regresar();
         }
     }
 }

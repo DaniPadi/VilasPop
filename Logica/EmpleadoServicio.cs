@@ -17,6 +17,11 @@ namespace Logica
 
         }
 
+        public string EnviarRegistro(string user, DateTime actual)
+        {
+            return empleadoRepositorio.EnviarRegistro(user,actual);
+        }
+
         public bool iniciarSesion(string usuario, string contraseña) 
         {
             int result = empleadoRepositorio.IniciarSesion(usuario, contraseña);
