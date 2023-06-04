@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VentanaPrincipal));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnProveedores = new System.Windows.Forms.Button();
             this.btnFactura = new System.Windows.Forms.Button();
             this.btnMateriaP = new System.Windows.Forms.Button();
@@ -56,6 +57,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtnombreProducto = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnEliminarMP = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
             this.grillaMateriaP = new System.Windows.Forms.DataGridView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -149,7 +151,6 @@
             this.DateDesde = new System.Windows.Forms.DateTimePicker();
             this.label34 = new System.Windows.Forms.Label();
             this.grillaFacturas = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.button3 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -163,6 +164,26 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label37 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.button6 = new System.Windows.Forms.Button();
+            this.btnRegresarP = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.label41 = new System.Windows.Forms.Label();
+            this.idProducto = new System.Windows.Forms.TextBox();
+            this.btnActualizarProducto = new System.Windows.Forms.Button();
+            this.label38 = new System.Windows.Forms.Label();
+            this.ProductPrice = new System.Windows.Forms.TextBox();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.comboUnidad2 = new System.Windows.Forms.ComboBox();
+            this.btnIngresar2 = new System.Windows.Forms.Button();
+            this.label39 = new System.Windows.Forms.Label();
+            this.txtCantidadIngr = new System.Windows.Forms.TextBox();
+            this.comboMateriaP2 = new System.Windows.Forms.ComboBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.productName = new System.Windows.Forms.TextBox();
+            this.tablaIngredientes = new System.Windows.Forms.DataGridView();
+            this.productosTabla = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -191,6 +212,11 @@
             this.tabPage8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox11.SuspendLayout();
+            this.tabPage9.SuspendLayout();
+            this.groupBox12.SuspendLayout();
+            this.groupBox13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tablaIngredientes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productosTabla)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -203,10 +229,11 @@
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Controls.Add(this.tabPage8);
-            this.tabControl1.Location = new System.Drawing.Point(12, 2);
+            this.tabControl1.Controls.Add(this.tabPage9);
+            this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(912, 453);
+            this.tabControl1.Size = new System.Drawing.Size(912, 443);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -222,10 +249,22 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(904, 427);
+            this.tabPage1.Size = new System.Drawing.Size(904, 417);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
+            this.button1.Font = new System.Drawing.Font("Bauhaus 93", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.CadetBlue;
+            this.button1.Location = new System.Drawing.Point(465, 327);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(180, 27);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "CLIENTES";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // btnProveedores
             // 
@@ -315,7 +354,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(904, 451);
+            this.tabPage2.Size = new System.Drawing.Size(904, 417);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -495,20 +534,31 @@
             // tabPage3
             // 
             this.tabPage3.BackgroundImage = global::Presentacion.Properties.Resources.fondo5;
+            this.tabPage3.Controls.Add(this.btnEliminarMP);
             this.tabPage3.Controls.Add(this.btnHome);
             this.tabPage3.Controls.Add(this.grillaMateriaP);
             this.tabPage3.Controls.Add(this.groupBox3);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(904, 451);
+            this.tabPage3.Size = new System.Drawing.Size(904, 417);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // btnEliminarMP
+            // 
+            this.btnEliminarMP.Location = new System.Drawing.Point(812, 384);
+            this.btnEliminarMP.Name = "btnEliminarMP";
+            this.btnEliminarMP.Size = new System.Drawing.Size(75, 23);
+            this.btnEliminarMP.TabIndex = 19;
+            this.btnEliminarMP.Text = "Eliminar";
+            this.btnEliminarMP.UseVisualStyleBackColor = true;
+            this.btnEliminarMP.Click += new System.EventHandler(this.btnEliminarMP_Click);
+            // 
             // btnHome
             // 
-            this.btnHome.Location = new System.Drawing.Point(812, 384);
+            this.btnHome.Location = new System.Drawing.Point(6, 388);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(75, 23);
             this.btnHome.TabIndex = 19;
@@ -524,6 +574,7 @@
             this.grillaMateriaP.RowHeadersWidth = 51;
             this.grillaMateriaP.Size = new System.Drawing.Size(448, 319);
             this.grillaMateriaP.TabIndex = 1;
+            this.grillaMateriaP.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaMateriaP_CellClick);
             // 
             // groupBox3
             // 
@@ -762,7 +813,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(904, 451);
+            this.tabPage4.Size = new System.Drawing.Size(904, 417);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -933,7 +984,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(904, 427);
+            this.tabPage5.Size = new System.Drawing.Size(904, 417);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "tabPage5";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1056,7 +1107,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(904, 427);
+            this.tabPage6.Size = new System.Drawing.Size(904, 417);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "tabPage6";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -1320,7 +1371,7 @@
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(904, 427);
+            this.tabPage7.Size = new System.Drawing.Size(904, 417);
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "tabPage7";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -1452,18 +1503,6 @@
             this.grillaFacturas.TabIndex = 3;
             this.grillaFacturas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaFacturas_CellClick);
             // 
-            // button1
-            // 
-            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
-            this.button1.Font = new System.Drawing.Font("Bauhaus 93", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.CadetBlue;
-            this.button1.Location = new System.Drawing.Point(465, 327);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(180, 27);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "CLIENTES";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // tabPage8
             // 
             this.tabPage8.BackgroundImage = global::Presentacion.Properties.Resources.fondo5;
@@ -1473,7 +1512,7 @@
             this.tabPage8.Location = new System.Drawing.Point(4, 22);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(904, 427);
+            this.tabPage8.Size = new System.Drawing.Size(904, 417);
             this.tabPage8.TabIndex = 7;
             this.tabPage8.Text = "tabPage8";
             this.tabPage8.UseVisualStyleBackColor = true;
@@ -1509,7 +1548,7 @@
             this.groupBox11.Controls.Add(this.textBox4);
             this.groupBox11.Location = new System.Drawing.Point(37, 19);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(404, 183);
+            this.groupBox11.Size = new System.Drawing.Size(404, 254);
             this.groupBox11.TabIndex = 21;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Proveedores";
@@ -1548,7 +1587,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(147, 148);
+            this.button4.Location = new System.Drawing.Point(143, 168);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 16;
@@ -1587,12 +1626,220 @@
             this.textBox4.Size = new System.Drawing.Size(229, 20);
             this.textBox4.TabIndex = 1;
             // 
+            // tabPage9
+            // 
+            this.tabPage9.BackgroundImage = global::Presentacion.Properties.Resources.fondo5;
+            this.tabPage9.Controls.Add(this.button6);
+            this.tabPage9.Controls.Add(this.btnRegresarP);
+            this.tabPage9.Controls.Add(this.btnEliminar);
+            this.tabPage9.Controls.Add(this.groupBox12);
+            this.tabPage9.Controls.Add(this.tablaIngredientes);
+            this.tabPage9.Controls.Add(this.productosTabla);
+            this.tabPage9.Location = new System.Drawing.Point(4, 22);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage9.Size = new System.Drawing.Size(904, 417);
+            this.tabPage9.TabIndex = 8;
+            this.tabPage9.Text = "tabPage9";
+            this.tabPage9.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(89, 22);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(141, 23);
+            this.button6.TabIndex = 25;
+            this.button6.Text = "Crear Nuevo Producto";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // btnRegresarP
+            // 
+            this.btnRegresarP.Location = new System.Drawing.Point(6, 388);
+            this.btnRegresarP.Name = "btnRegresarP";
+            this.btnRegresarP.Size = new System.Drawing.Size(75, 23);
+            this.btnRegresarP.TabIndex = 24;
+            this.btnRegresarP.Text = "Regresar";
+            this.btnRegresarP.UseVisualStyleBackColor = true;
+            this.btnRegresarP.Click += new System.EventHandler(this.btnRegresarP_Click);
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Location = new System.Drawing.Point(809, 377);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(75, 23);
+            this.btnEliminar.TabIndex = 9;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click_1);
+            // 
+            // groupBox12
+            // 
+            this.groupBox12.Controls.Add(this.label41);
+            this.groupBox12.Controls.Add(this.idProducto);
+            this.groupBox12.Controls.Add(this.btnActualizarProducto);
+            this.groupBox12.Controls.Add(this.label38);
+            this.groupBox12.Controls.Add(this.ProductPrice);
+            this.groupBox12.Controls.Add(this.groupBox13);
+            this.groupBox12.Controls.Add(this.label40);
+            this.groupBox12.Controls.Add(this.productName);
+            this.groupBox12.Location = new System.Drawing.Point(22, 52);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(273, 314);
+            this.groupBox12.TabIndex = 2;
+            this.groupBox12.TabStop = false;
+            this.groupBox12.Text = "Receta";
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(15, 27);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(18, 13);
+            this.label41.TabIndex = 11;
+            this.label41.Text = "ID";
+            // 
+            // idProducto
+            // 
+            this.idProducto.AutoCompleteCustomSource.AddRange(new string[] {
+            "yaga",
+            "rita"});
+            this.idProducto.Enabled = false;
+            this.idProducto.Location = new System.Drawing.Point(18, 43);
+            this.idProducto.Name = "idProducto";
+            this.idProducto.Size = new System.Drawing.Size(31, 20);
+            this.idProducto.TabIndex = 10;
+            // 
+            // btnActualizarProducto
+            // 
+            this.btnActualizarProducto.Location = new System.Drawing.Point(92, 124);
+            this.btnActualizarProducto.Name = "btnActualizarProducto";
+            this.btnActualizarProducto.Size = new System.Drawing.Size(75, 23);
+            this.btnActualizarProducto.TabIndex = 9;
+            this.btnActualizarProducto.Text = "Actualizar";
+            this.btnActualizarProducto.UseVisualStyleBackColor = true;
+            this.btnActualizarProducto.Click += new System.EventHandler(this.btnActualizarProducto_Click);
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(44, 82);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(85, 13);
+            this.label38.TabIndex = 5;
+            this.label38.Text = "Precio de venta:";
+            // 
+            // ProductPrice
+            // 
+            this.ProductPrice.AutoCompleteCustomSource.AddRange(new string[] {
+            "yaga",
+            "rita"});
+            this.ProductPrice.Location = new System.Drawing.Point(135, 82);
+            this.ProductPrice.Name = "ProductPrice";
+            this.ProductPrice.Size = new System.Drawing.Size(107, 20);
+            this.ProductPrice.TabIndex = 4;
+            // 
+            // groupBox13
+            // 
+            this.groupBox13.Controls.Add(this.comboUnidad2);
+            this.groupBox13.Controls.Add(this.btnIngresar2);
+            this.groupBox13.Controls.Add(this.label39);
+            this.groupBox13.Controls.Add(this.txtCantidadIngr);
+            this.groupBox13.Controls.Add(this.comboMateriaP2);
+            this.groupBox13.Location = new System.Drawing.Point(18, 164);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(234, 161);
+            this.groupBox13.TabIndex = 3;
+            this.groupBox13.TabStop = false;
+            this.groupBox13.Text = "Ingrediente";
+            // 
+            // comboUnidad2
+            // 
+            this.comboUnidad2.FormattingEnabled = true;
+            this.comboUnidad2.Items.AddRange(new object[] {
+            "gr",
+            "ml",
+            "ud"});
+            this.comboUnidad2.Location = new System.Drawing.Point(166, 81);
+            this.comboUnidad2.Name = "comboUnidad2";
+            this.comboUnidad2.Size = new System.Drawing.Size(49, 21);
+            this.comboUnidad2.TabIndex = 8;
+            this.comboUnidad2.Text = "gr";
+            // 
+            // btnIngresar2
+            // 
+            this.btnIngresar2.Location = new System.Drawing.Point(74, 129);
+            this.btnIngresar2.Name = "btnIngresar2";
+            this.btnIngresar2.Size = new System.Drawing.Size(75, 23);
+            this.btnIngresar2.TabIndex = 7;
+            this.btnIngresar2.Text = "Ingresar";
+            this.btnIngresar2.UseVisualStyleBackColor = true;
+            this.btnIngresar2.Click += new System.EventHandler(this.btnIngresar2_Click);
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(16, 89);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(52, 13);
+            this.label39.TabIndex = 2;
+            this.label39.Text = "Cantidad:";
+            // 
+            // txtCantidadIngr
+            // 
+            this.txtCantidadIngr.Location = new System.Drawing.Point(74, 82);
+            this.txtCantidadIngr.Name = "txtCantidadIngr";
+            this.txtCantidadIngr.Size = new System.Drawing.Size(86, 20);
+            this.txtCantidadIngr.TabIndex = 1;
+            // 
+            // comboMateriaP2
+            // 
+            this.comboMateriaP2.FormattingEnabled = true;
+            this.comboMateriaP2.Location = new System.Drawing.Point(31, 37);
+            this.comboMateriaP2.Name = "comboMateriaP2";
+            this.comboMateriaP2.Size = new System.Drawing.Size(159, 21);
+            this.comboMateriaP2.TabIndex = 0;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(71, 27);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(109, 13);
+            this.label40.TabIndex = 1;
+            this.label40.Text = "Nombre del producto:";
+            // 
+            // productName
+            // 
+            this.productName.Location = new System.Drawing.Point(55, 43);
+            this.productName.Name = "productName";
+            this.productName.Size = new System.Drawing.Size(187, 20);
+            this.productName.TabIndex = 0;
+            // 
+            // tablaIngredientes
+            // 
+            this.tablaIngredientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tablaIngredientes.Location = new System.Drawing.Point(347, 240);
+            this.tablaIngredientes.Name = "tablaIngredientes";
+            this.tablaIngredientes.Size = new System.Drawing.Size(537, 131);
+            this.tablaIngredientes.TabIndex = 1;
+            this.tablaIngredientes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tablaIngredientes_CellClick);
+            // 
+            // productosTabla
+            // 
+            this.productosTabla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.productosTabla.Location = new System.Drawing.Point(347, 22);
+            this.productosTabla.Name = "productosTabla";
+            this.productosTabla.Size = new System.Drawing.Size(537, 183);
+            this.productosTabla.TabIndex = 0;
+            this.productosTabla.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.productosTabla_CellClick);
+            // 
             // VentanaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(927, 490);
+            this.ClientSize = new System.Drawing.Size(927, 469);
             this.Controls.Add(this.tabControl1);
             this.Name = "VentanaPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -1641,6 +1888,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox11.ResumeLayout(false);
             this.groupBox11.PerformLayout();
+            this.tabPage9.ResumeLayout(false);
+            this.groupBox12.ResumeLayout(false);
+            this.groupBox12.PerformLayout();
+            this.groupBox13.ResumeLayout(false);
+            this.groupBox13.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tablaIngredientes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productosTabla)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1781,5 +2035,26 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TabPage tabPage9;
+        private System.Windows.Forms.DataGridView productosTabla;
+        private System.Windows.Forms.GroupBox groupBox12;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.TextBox ProductPrice;
+        private System.Windows.Forms.GroupBox groupBox13;
+        private System.Windows.Forms.ComboBox comboUnidad2;
+        private System.Windows.Forms.Button btnIngresar2;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.TextBox txtCantidadIngr;
+        private System.Windows.Forms.ComboBox comboMateriaP2;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.TextBox productName;
+        private System.Windows.Forms.DataGridView tablaIngredientes;
+        private System.Windows.Forms.Button btnActualizarProducto;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.TextBox idProducto;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Button btnEliminarMP;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button btnRegresarP;
     }
 }

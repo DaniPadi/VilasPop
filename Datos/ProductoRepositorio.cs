@@ -59,5 +59,19 @@ namespace Datos
             Close();
             return listaProductos;
         }
+        public string Update(Producto producto) 
+        {
+            Open();
+            OracleCommand command = new OracleCommand("actualizar_producto", conexion);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add("v_id_producto", OracleType.Number).Value = Int32.Parse(producto.idProducto);
+            command.Parameters.Add("v_nombre_producto", OracleType.VarChar).Value = producto.nombreProducto;
+            command.Parameters.Add("v_precio", OracleType.Number).Value = producto.precio;
+
+            int r = command.ExecuteNonQuery();
+            Close();
+            return "1";
+
+        }
     }
 }

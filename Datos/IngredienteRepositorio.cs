@@ -79,15 +79,32 @@ namespace Datos
             OracleCommand command = new OracleCommand("reemplazar_materiaprima", conexion);
             command.CommandType = CommandType.StoredProcedure;
 
-            // Agregar los parámetros de entrada
+
             command.Parameters.Add("v_id_materiap_new", OracleType.Number).Value = idNuevo;
             command.Parameters.Add("v_id_materiap_old", OracleType.Number).Value = idViejo;
 
-            // Ejecutar el procedimiento almacenado
+     
             int r = command.ExecuteNonQuery();
             Close();
 
             return r;
+        }
+
+        public string Eliminar(Ingrediente ingrediente) 
+        {
+
+            Open();
+            OracleCommand command = new OracleCommand("eliminar_ingrediente", conexion);
+            command.CommandType = CommandType.StoredProcedure;
+
+            command.Parameters.Add("v_id_receta", OracleType.Number).Value = ingrediente.idReceta;
+            command.Parameters.Add("v_id_materiap", OracleType.Number).Value = ingrediente.idmateriaPrima;
+
+            int r = command.ExecuteNonQuery();
+            Close();
+
+            return r + "";
+
         }
     }
 }

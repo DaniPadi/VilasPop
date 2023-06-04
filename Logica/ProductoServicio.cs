@@ -59,5 +59,11 @@ namespace Logica
 
 
         }
+
+        public string Update(Producto producto) 
+        {
+
+            return productoRepositorio.Update(producto);
+        }
     }
 }

@@ -52,7 +52,11 @@ namespace Presentacion
         List<Ingrediente> ingredientesEnProceso = new List<Ingrediente>();
         List<MateriaPrima> materiasPrimasParaActualizar = new List<MateriaPrima>();
 
+        //Sección de productos
+        Ingrediente ingredienteSelected = null;
 
+        //Sección de materias primas
+        MateriaPrima materiaPrimaSeleccionada = null;
 
         public string Informacion { get; set; }
         public VentanaPrincipal()   
@@ -184,15 +188,21 @@ namespace Presentacion
                 && (!EsNulo(txtUnidadesM.Text)) && (!EsNulo(txtCostoM.Text)))
             {
                 bool ActualizarMp = false;
-                List<MateriaPrimaDTO> mtDTO = (List<MateriaPrimaDTO>)grillaMateriaP.DataSource;
+                List<MateriaPrimaDTO> mtDTO = servicioMateriaPrima.obtenerDTO();
                 int idViejo = 0;
                 foreach (MateriaPrimaDTO materia in mtDTO)
                 {
-                    if (txtNombreMateriaP.Text.Equals(materia.NOMBRE))
+                    if (txtNombreMateriaP.Text.ToUpper().Equals(materia.NOMBRE))
                     {
-                        Console.WriteLine(materia.NOMBRE);
-                        ActualizarMp = true;
-                        idViejo = Int32.Parse(materia.ID);
+                        if (Int32.Parse(materia.ID) > idViejo) 
+                        {
+                            idViejo = Int32.Parse(materia.ID);
+
+                            
+                            ActualizarMp = true;
+                            idViejo = Int32.Parse(materia.ID);
+                        }
+
 
                     }
                 }
@@ -200,7 +210,9 @@ namespace Presentacion
                 ingresarMateriaPrima();
                 if (ActualizarMp)
                 {
-                    reEnfocarProductos(Int32.Parse(txtIdMateriaPrima.Text), idViejo);
+                   
+                    reEnfocarProductos(Int32.Parse(txtIdMateriaPrima.Text) - 1 , idViejo);
+                    DesecharMateriaPrima(idViejo);
 
 
                 }
@@ -211,12 +223,16 @@ namespace Presentacion
             }
 
         }
-
+       
         private void reEnfocarProductos(int idNuevo, int idViejo)
         {
             servicioIngrediente.reEnfocarProductos(idNuevo,idViejo);
         }
 
+        private string DesecharMateriaPrima(int viejo)
+        {
+            return servicioMateriaPrima.UpdateCero(viejo);
+        }
         public void ingresarMateriaPrima() 
         {
 
@@ -273,6 +289,7 @@ namespace Presentacion
 
             CargarMateriasP();
             cargarComboIngredientes();
+            Console.WriteLine("pasooo");
         }
         public void CargarMateriasP()
         {
@@ -319,7 +336,9 @@ namespace Presentacion
         public void cargarProductosVenta() 
         {
             tablaProductos.DataSource = servicioProducto.obtenerProductosDTO();
-        
+            productosTabla.DataSource = servicioProducto.obtenerProductosDTO();
+
+
         }
         private void tablaProductos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -339,14 +358,19 @@ namespace Presentacion
         //Recetas-----------------------------------------------------------------
         public void cargarComboIngredientes() 
         {
-            List<MateriaPrima> materiasP = servicioMateriaPrima.obtenerMateriasPrimas();
+            List<MateriaPrima> materiasP = servicioMateriaPrima.obtenerMateriasPrimasValidas();
             comboMateriaP.Items.Clear();
             comboMateriaP.Items.Add("--Seleccionar ingrediente--");
+            comboMateriaP2.Items.Clear();
+            comboMateriaP2.Items.Add("--Seleccionar ingrediente--");
             foreach (MateriaPrima materiaP in materiasP) 
             {
                 comboMateriaP.Items.Add(materiaP.nombreMateriaPrima);
+                comboMateriaP2.Items.Add(materiaP.nombreMateriaPrima);
+
             }
             comboMateriaP.SelectedIndex= 0;
+            comboMateriaP2.SelectedIndex= 0;
         }
 
         private void btnIngresarIngrediente_Click(object sender, EventArgs e)
@@ -417,18 +441,28 @@ namespace Presentacion
 
             if (productoSeleccionado.PRECIO != null ) 
             {
-                if (existencias >= Int32.Parse(comboCantidad.Text))
+                if (existencias == -1)
                 {
-                   
-                    subTotal = float.Parse(productoSeleccionado.PRECIO) * Int32.Parse(comboCantidad.Text);
-                    labelSubtotal.Text = subTotal + " $";
-
+                    MessageBox.Show("Este prdoucto no se puede preparar: vencimiento de materia prima. ");
+                    comboCantidad.Text = "1";
                 }
                 else 
                 {
-                    MessageBox.Show("solo hay para preparar: " + existencias);
-                    comboCantidad.Text = existencias + "";
+                    if (existencias >= Int32.Parse(comboCantidad.Text))
+                    {
+
+                        subTotal = float.Parse(productoSeleccionado.PRECIO) * Int32.Parse(comboCantidad.Text);
+                        labelSubtotal.Text = subTotal + " $";
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("solo hay para preparar: " + existencias);
+
+                    }
+
                 }
+                
                
                
             }
@@ -461,6 +495,14 @@ namespace Presentacion
                             {
                                 materia = materi;
                             }
+                        
+                        }
+
+                        if (materia.fechaCaducidad < DateTime.Now) 
+                        {
+                            Console.WriteLine(materia.fechaCaducidad + " < " + DateTime.Now);
+
+                            return -1;
                         
                         }
 
@@ -850,7 +892,7 @@ namespace Presentacion
 
         private void btnProductos_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedIndex = 1;
+            tabControl1.SelectedIndex = 8;
         }
 
         private void btnMateriaP_Click(object sender, EventArgs e)
@@ -910,6 +952,10 @@ namespace Presentacion
         public void Regresar() 
         {
             tabControl1.SelectedIndex = 0;
+            CargarProveedores();
+            CargarMateriasP();
+            cargarProductosVenta();
+            cargarComboIngredientes();
 
         }
 
@@ -936,6 +982,148 @@ namespace Presentacion
         private void btnRegresar2_Click(object sender, EventArgs e)
         {
             Regresar();
+
+        }
+
+        private void productosTabla_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = tablaProductos.Rows[e.RowIndex];
+            productoSeleccionado = (ProductoDTO)row.DataBoundItem;
+            productName.Text = productoSeleccionado.PRODUCTO;
+            ProductPrice.Text = productoSeleccionado.PRECIO;
+            idProducto.Text = productoSeleccionado.ID;
+            List<Ingrediente> ingrdientes = new List<Ingrediente>();
+            ingrdientes = servicioIngrediente.obtenerIngredientesPorReceta(productoSeleccionado.ID);
+            tablaIngredientes.DataSource = ingrdientes;
+
+        }
+
+        private void btnActualizarProducto_Click(object sender, EventArgs e)
+        {
+            if (!EsNulo(productName.Text) && (!EsNulo(ProductPrice.Text)))
+            {
+
+                Producto producto = new Producto(idProducto.Text,productName.Text,float.Parse(ProductPrice.Text));
+                servicioProducto.Update(producto);
+                cargarProductosVenta();
+                MessageBox.Show("Producto Actualizado");
+
+            }
+            else 
+            {
+                MessageBox.Show("Debe seleccionar un producto");
+            }
+            }
+
+        private void btnEliminar_Click_1(object sender, EventArgs e)
+        {
+
+            if (ingredienteSelected != null)
+            {
+                servicioIngrediente.Eliminar(ingredienteSelected);
+                MessageBox.Show("Ingrediente Eliminado");
+                List<Ingrediente> ingrdientes = new List<Ingrediente>();
+                ingrdientes = servicioIngrediente.obtenerIngredientesPorReceta(idProducto.Text);
+                tablaIngredientes.DataSource = ingrdientes;
+                ingredienteSelected= null;
+
+            }
+            else 
+            {
+                MessageBox.Show("Debe seleccionar un ingrediente");
+
+            }
+
+
+            
+
+            
+        }
+
+        private void tablaIngredientes_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = tablaIngredientes.Rows[e.RowIndex];
+            ingredienteSelected = (Ingrediente)row.DataBoundItem;
+        }
+
+        private void btnIngresar2_Click(object sender, EventArgs e)
+        {
+            if ((!EsNulo(txtCantidadIngr.Text)))
+            {
+                Ingrediente ingrediente = new Ingrediente();
+                MateriaPrima materiaP = servicioMateriaPrima.obtenerMateriaPrimaConNombre(comboMateriaP2.Text);
+                ingrediente.idmateriaPrima = materiaP.idMateriaPrima;
+                ingrediente.idReceta = idProducto.Text;
+
+                if (comboUnidad2.Text.Equals("gr"))
+                {
+                    ingrediente.gramos = float.Parse(txtCantidadIngr.Text);
+                    ingrediente.unidades = 0;
+                    ingrediente.mililitros = 0;
+                }
+                else if (comboUnidad2.Text.Equals("ml"))
+                {
+                    ingrediente.gramos = 0;
+                    ingrediente.unidades = 0;
+                    ingrediente.mililitros = float.Parse(txtCantidadIngr.Text);
+                }
+                else
+                {
+                    ingrediente.gramos = 0;
+                    ingrediente.unidades = Int32.Parse(txtCantidadIngr.Text);
+                    ingrediente.mililitros = 0;
+
+                }
+
+                string msg = servicioIngrediente.Insert(new List<Ingrediente>() { ingrediente });
+                MessageBox.Show("Ingrediente Ingresado");
+                List<Ingrediente> ingrdientes = new List<Ingrediente>();
+                ingrdientes = servicioIngrediente.obtenerIngredientesPorReceta(idProducto.Text);
+                tablaIngredientes.DataSource = ingrdientes;
+                ingredienteSelected = null;
+
+            }
+            else 
+            {
+                MessageBox.Show("Debe ingresar una cantidad");
+
+
+            }
+
+
+        }
+
+        private void grillaMateriaP_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = grillaMateriaP.Rows[e.RowIndex];
+            MateriaPrimaDTO materiaPDTO = (MateriaPrimaDTO)row.DataBoundItem;
+            materiaPrimaSeleccionada = servicioMateriaPrima.obtenerMateriaPrimaConID(materiaPDTO.ID);
+
+        }
+
+        private void btnEliminarMP_Click(object sender, EventArgs e)
+        {
+            if (materiaPrimaSeleccionada != null)
+            {
+                string msg = servicioMateriaPrima.UpdateCero(Int32.Parse(materiaPrimaSeleccionada.idMateriaPrima));
+                materiaPrimaSeleccionada = null;
+                MessageBox.Show("Materia Prima eliminada");
+            }
+            else 
+            {
+                MessageBox.Show("Debe seleccionar una materia prima");
+
+            }
+        }
+
+        private void btnRegresarP_Click(object sender, EventArgs e)
+        {
+            Regresar();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 1;
         }
     }
 }
