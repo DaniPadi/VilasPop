@@ -42,6 +42,11 @@ namespace Logica
 
             return ingredienteRepositorio.reEnfocarProductos(idNuevo, idViejo);
         }
+        public string Eliminar(Ingrediente ingrediente) 
+        {
+
+            return ingredienteRepositorio.Eliminar(ingrediente);
+        }
 
 
     }

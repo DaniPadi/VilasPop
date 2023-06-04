@@ -9,16 +9,16 @@ namespace Logica
 {
     public class MateriaPrimaSerivicio
     {
-        materiaPrimaRepositorio MateriaPrepositorio;
+        materiaPrimaRepositorio materiaPrimaRepositorio;
         public MateriaPrimaSerivicio(String connectionstring)
         {
-            MateriaPrepositorio = new materiaPrimaRepositorio(connectionstring);
+            materiaPrimaRepositorio = new materiaPrimaRepositorio(connectionstring);
         }
 
         public string Insert(MateriaPrima materiaP) 
         {
 
-        return MateriaPrepositorio.Insert(materiaP);
+        return materiaPrimaRepositorio.Insert(materiaP);
 
         }
 
@@ -31,7 +31,12 @@ namespace Logica
         public List<MateriaPrima> obtenerMateriasPrimas() 
         {
 
-            return MateriaPrepositorio.obtenerMateriasPrimas();
+            return materiaPrimaRepositorio.obtenerMateriasPrimas();
+        }
+        public List<MateriaPrima> obtenerMateriasPrimasValidas()
+        {
+
+            return materiaPrimaRepositorio.obtenerMateriasPrimasValidas();
         }
 
         public int obtenerSiguienteCodigo() 
@@ -82,14 +87,48 @@ namespace Logica
 
             return materiasPDTO;
         }
+        public List<MateriaPrimaDTO> obtenerDTOValido()
 
-        public MateriaPrima obtenerMateriaPrimaConID(int idMP)
+        {
+            List<MateriaPrimaDTO> materiasPDTO = new List<MateriaPrimaDTO>();
+            List<MateriaPrima> materiasP = obtenerMateriasPrimasValidas();
+            foreach (MateriaPrima materia in materiasP)
+            {
+                MateriaPrimaDTO dto = new MateriaPrimaDTO();
+                dto.ID = materia.idMateriaPrima.ToString();
+                dto.NOMBRE = materia.nombreMateriaPrima;
+                dto.CADUCIDAD = materia.fechaCaducidad.ToShortDateString();
+                if (materia.gramos > 0)
+                {
+                    dto.ALMACEN = materia.gramos + " gr";
+                }
+                else if (materia.mililitros > 0)
+                {
+                    dto.ALMACEN = materia.mililitros + " ml";
+                }
+                else
+                {
+                    dto.ALMACEN = materia.unidades + " ud";
+                }
+
+
+                materiasPDTO.Add(dto);
+
+
+            }
+
+
+            return materiasPDTO;
+        }
+
+
+        public MateriaPrima obtenerMateriaPrimaConID(string idMP)
         {
             List<MateriaPrima> materiasP = obtenerMateriasPrimas();
             foreach (MateriaPrima mp in materiasP) 
             {
-                Console.WriteLine("id: " + idMP + " id2: " + mp.idMateriaPrima);
-                if (mp.idMateriaPrima.Equals(idMP+"")) 
+               
+                if (mp.idMateriaPrima.Equals(idMP)) 
                 {
                 return mp;
                 }
@@ -100,7 +139,8 @@ namespace Logica
 
         public MateriaPrima obtenerMateriaPrimaConNombre(string nombre)
         {
-            List<MateriaPrima> materiasP = obtenerMateriasPrimas();
+            List<MateriaPrima> materiasP = obtenerMateriasPrimasValidas();
+
             foreach (MateriaPrima mp in materiasP)
             {
                
@@ -120,11 +160,22 @@ namespace Logica
             foreach (MateriaPrima materia in materiasP) 
             {
 
-                count =MateriaPrepositorio.Update(materia);
+                count =materiaPrimaRepositorio.Update(materia);
             }
 
             return count.ToString();
         
+        }
+        public string UpdateCero(int materiaId) 
+        {
+        
+        return materiaPrimaRepositorio.UpdateCero(materiaId);
+        }
+
+        public string Eliminar(MateriaPrima materiaP) 
+        {
+        
+        return materiaPrimaRepositorio.Eliminar(materiaP);
         }
     }
 }

@@ -31,26 +31,6 @@ namespace Datos
             return  "1";
         }
 
-        public string ObtenerSiguienteID() 
-        {
-            string id = "";
-            Open();
-            OracleCommand command = new OracleCommand("siguienteId_materias_primas", conexion);
-            command.CommandType = CommandType.StoredProcedure;
-
-            // Parámetro de salida para capturar el valor de retorno
-            command.CommandType = CommandType.StoredProcedure;
-
-            OracleParameter resultCursor = new OracleParameter();
-            resultCursor.ParameterName = "result_currval";
-            resultCursor.OracleType = OracleType.Int32;
-            resultCursor.Direction = ParameterDirection.ReturnValue;
-            command.Parameters.Add(resultCursor);
-            int result = command.ExecuteNonQuery();
-            Close();
-            return id + result;
-        
-        }
 
         public List<MateriaPrima> obtenerMateriasPrimas() 
         {
@@ -87,8 +67,43 @@ namespace Datos
      
             return materiasPrimas;
         }
+        public List<MateriaPrima> obtenerMateriasPrimasValidas()
+        {
+            List<MateriaPrima> materiasPrimas = new List<MateriaPrima>();
+            OracleCommand command = new OracleCommand("obtener_materias_primas_validas", conexion);
+            command.CommandType = CommandType.StoredProcedure;
 
-        public  int Update(MateriaPrima materia)
+            OracleParameter resultCursor = new OracleParameter();
+            resultCursor.ParameterName = "result_cursor";
+            resultCursor.OracleType = OracleType.Cursor;
+            resultCursor.Direction = ParameterDirection.ReturnValue;
+
+
+            command.Parameters.Add(resultCursor);
+
+            Open();
+            OracleDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                MateriaPrima materiaP = new MateriaPrima();
+                materiaP.idMateriaPrima = reader.GetInt32(0).ToString();
+                materiaP.nombreMateriaPrima = reader.GetString(1);
+                materiaP.fechaCaducidad = reader.GetDateTime(2);
+                materiaP.gramos = reader.GetFloat(3);
+                materiaP.mililitros = reader.GetFloat(4);
+                materiaP.unidades = reader.GetInt32(5);
+                materiasPrimas.Add(materiaP);
+            }
+
+            reader.Close();
+            Close();
+
+            return materiasPrimas;
+        }
+
+
+        public int Update(MateriaPrima materia)
         {
             Open();
             OracleCommand command = new OracleCommand("actualizar_materias_primas", conexion);
@@ -103,6 +118,32 @@ namespace Datos
             int r = command.ExecuteNonQuery();
             Close();
             return r;
+        }
+        public string UpdateCero(int materiaId)
+        {
+            Open();
+            OracleCommand command = new OracleCommand("actualizar_materia_cero", conexion);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add("v_id_materiap", OracleType.Number).Value = materiaId;
+            int r = command.ExecuteNonQuery();
+            Close();
+            return r + "";
+        }
+
+        public string Eliminar(MateriaPrima materiaP)
+        {
+
+            Open();
+            OracleCommand command = new OracleCommand("eliminar_materia_prima", conexion);
+            command.CommandType = CommandType.StoredProcedure;
+
+            command.Parameters.Add("v_id_materiap", OracleType.Number).Value = materiaP.idMateriaPrima;
+
+            int r = command.ExecuteNonQuery();
+            Close();
+
+            return r + "";
+
         }
     }
 }
