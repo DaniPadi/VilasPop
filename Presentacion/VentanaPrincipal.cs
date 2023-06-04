@@ -586,9 +586,9 @@ namespace Presentacion
             {
                 if (cambio >= 0)
                 {
-                    Factura factura = new Factura(CodigoFactura, DateTime.Now, total, txtCedulaCliente.Text, "1");
-                    string msg = servicioFactura.Insert(factura);
                     int msg2 = servicioVenta.Insert(ventasFacturando);
+                    Factura factura = new Factura(CodigoFactura, DateTime.Now, total, cliente, "1");
+                    string msg = servicioFactura.Insert(factura);
                     string msg3 = servicioMateriaPrima.Update(materiasPrimasParaActualizar);
                     MessageBox.Show("Factura: " + msg + " vendidos: " + msg2 + " actualizados: " + msg3);
                     generarPDF();
@@ -598,31 +598,26 @@ namespace Presentacion
                 {
                     MessageBox.Show("Saldo Insuficiente");
                 }
-
-
-
             }
             else 
-            
             {
-                MessageBox.Show("CLiente no registrado");
+                MessageBox.Show("Cliente no registrado");
             }
 
         }
 
-        public void LimpiarFactura() 
+        public void LimpiarFactura()
         {
-
-             productoSeleccionado = new ProductoDTO();
-             subTotal = 0;
-             total = 0;
+            productoSeleccionado = new ProductoDTO();
+            subTotal = 0;
+            total = 0;
             dineroDado = 0;
-             cambio = 0;
-           ventasFacturando = new List<Venta>();
+            cambio = 0;
+            ventasFacturando = new List<Venta>();
             CodigoFactura = null;
-             materiasPrimasActuales = new List<MateriaPrima>();
-             ingredientesEnProceso = new List<Ingrediente>();
-             materiasPrimasParaActualizar = new List<MateriaPrima>();
+            materiasPrimasActuales = new List<MateriaPrima>();
+            ingredientesEnProceso = new List<Ingrediente>();
+            materiasPrimasParaActualizar = new List<MateriaPrima>();
             listaFactura.Items.Clear();
             cargarProductosVenta();
             txtProductoFactura.Text = "";
@@ -634,14 +629,10 @@ namespace Presentacion
             if (groupCliente.Height == 81)
             {
                 groupCliente.Height = 320;
-
-              
             }
             else
             {
                 groupCliente.Height = 81;
-               
-
             }
         }
 
@@ -657,25 +648,22 @@ namespace Presentacion
                     grillaFacturas.DataSource = facturas;
                     grillaFacturas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                     FacturasInfo infoFacturas = servicioFactura.infoFacturas(facturas);
-                    labelInfo1.Text = "Número de facturas: "+infoFacturas.ventas;
-                    labelInfo2.Text = "Dinero ingresado: "+infoFacturas.dinero +" $";
+                    labelInfo1.Text = "Número de facturas: " + infoFacturas.ventas;
+                    labelInfo2.Text = "Dinero ingresado: " + infoFacturas.dinero + " $";
                 }
-                else 
+                else
                 {
                     MessageBox.Show("No se encuentran registros de esas fechas");
                     grillaFacturas.DataSource = facturas;
                     labelInfo1.Text = "Número de facturas: " + 0;
                     labelInfo2.Text = "Dinero ingresado: " + 0 + " $";
                     labelInfo3.Text = "";
-
                 }
-
             }
             else
             {
                 Console.WriteLine("La fecha de inicio debe ser anterior a la fecha final.");
             }
-
         }
 
         private void grillaFacturas_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -691,18 +679,14 @@ namespace Presentacion
                
                 labelInfo1.Text = "Código Factura: " + facturaselected.id_factura;
                 labelInfo2.Text = $"Dinero ingresado: {facturaselected.precioTotal} $";
-                labelInfo3.Text = "Cliente: " + facturaselected.IdCliente;
+                labelInfo3.Text = "Cliente: " + facturaselected.cliente.cedula;
             }
-                
-
         }
 
         private void groupBox10_Enter(object sender, EventArgs e)
         {
 
         }
-
-
         //Funciones extra
         public string ObtenerDigitosFecha(string fecha)
         {
@@ -716,7 +700,6 @@ namespace Presentacion
                     digitosFecha += caracter;
                 }
             }
-
             return digitosFecha;
         }
         public void generarPDF()
@@ -873,21 +856,7 @@ namespace Presentacion
             txtGramosM.Enabled = radioGramos.Checked;
             txtMililitrosM.Enabled = radioMililitros.Checked;
             txtUnidadesM.Enabled = radioUnidades.Checked;
-            //if (radioGramos.Checked)
-            //{
-                
-            //    DesactivarCamposRadioButton(txtMililitrosM);
-            //    DesactivarCamposRadioButton(txtUnidadesM);
-            //}
         }
-
-
-        private void DesactivarCamposRadioButton(TextBox CampoNoSeleccionado)
-        {
-            CampoNoSeleccionado.Enabled = false;
-            CampoNoSeleccionado.Text = string.Empty;
-        }
-
         private void groupBox4_Enter(object sender, EventArgs e)
         {
 

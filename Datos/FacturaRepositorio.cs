@@ -49,7 +49,7 @@ namespace Datos
                 factura.id_factura = reader.GetString(0);
                 factura.fecha = reader.GetDateTime(1);
                 factura.precioTotal = reader.GetFloat(2);
-                factura.IdCliente = reader.GetString(3);
+                factura.cliente.cedula = reader.GetString(3);
                 factura.IdMetodo = reader.GetInt32(4).ToString();
                 facturas.Add(factura);
             }
@@ -68,7 +68,7 @@ namespace Datos
             command.Parameters.Add("v_id_factura", OracleType.VarChar).Value = factura.id_factura;
             command.Parameters.Add("v_fechafactura", OracleType.DateTime).Value = factura.fecha;
             command.Parameters.Add("v_preciototal", OracleType.Number).Value = factura.precioTotal;
-            command.Parameters.Add("v_cliente", OracleType.VarChar).Value = factura.IdCliente;
+            command.Parameters.Add("v_cliente", OracleType.VarChar).Value = factura.cliente.cedula;
             command.Parameters.Add("v_id_metodo", OracleType.Number).Value = Int32.Parse(factura.IdMetodo);
             command.ExecuteNonQuery();
             Close();
@@ -98,7 +98,7 @@ namespace Datos
                 factura.id_factura = reader.GetString(0);
                 factura.fecha = reader.GetDateTime(1);
                 factura.precioTotal = reader.GetFloat(2);
-                factura.IdCliente = reader.GetString(3);
+                factura.cliente= new ClienteRepositorio(this.conexion.ConnectionString).BuscarCliente(reader.GetString(3));
                 factura.IdMetodo = reader.GetInt32(4).ToString();
                 facturas.Add(factura);
             }
@@ -106,11 +106,7 @@ namespace Datos
             reader.Close();
             Close();
 
-
-
             return facturas;
-
-
         }
     }
 }

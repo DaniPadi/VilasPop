@@ -23,17 +23,12 @@ namespace Logica
             {
                 filas += ventaRepositorio.Insert(venta);
             }
-
             return filas;
-        
         }
 
         public List<Venta> obtenerVentasConFactura(string factura) 
         {
-
             return ventaRepositorio.obtenerVentasConFactura(factura);
-        }
-
-       
+        }  
     }
 }

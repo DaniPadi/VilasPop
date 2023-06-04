@@ -14,12 +14,10 @@ namespace Logica
         public FacturaServicio(string ConnectionString)
         {
             this.facturaRepositorio = new FacturaRepositorio(ConnectionString);
-
         }
 
         public string Insert(Factura factura) 
         {
-            Console.WriteLine("Estoy aquí");
             return facturaRepositorio.Insert(factura);
         }
 
@@ -45,12 +43,8 @@ namespace Logica
             foreach (Factura factura in facturas) 
             {
                 dinero += factura.precioTotal;
-            
             }
-
             return new FacturasInfo(facts, dinero);
-        
-
         }
     }
 }
