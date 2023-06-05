@@ -294,7 +294,7 @@ namespace Presentacion
         }
         public void CargarMateriasP()
         {
-            List<MateriaPrimaDTO> listaDTO = servicioMateriaPrima.obtenerDTO();
+            List<MateriaPrimaDTO> listaDTO = servicioMateriaPrima.obtenerDTOValido();
             grillaMateriaP.DataSource = listaDTO;
         }
 
@@ -557,41 +557,61 @@ namespace Presentacion
             string fecha = DateTime.Now.ToShortDateString();
             CodigoFactura = ObtenerDigitosFecha(fecha) + servicioFactura.obtenerCodigoFactura();
             Venta venta = new Venta(productoSeleccionado.ID, CodigoFactura, Int32.Parse(comboCantidad.Text), subTotal);
-            ventasFacturando.Add(venta);
-            listaFactura.Items.Add(productoSeleccionado.ID + " -. " + productoSeleccionado.PRODUCTO + " x " + comboCantidad.Text + "   -----------------------   " + subTotal + " $");
-            total += subTotal;
-            labelTotal.Text = total + " $";
-            
+            bool existe = false;
+            foreach (Venta vent in ventasFacturando) 
+            {
+                if (vent.id_producto.Equals(venta.id_producto)) 
+                {
+                    existe = true;
+                
+                
+                }
+            }
+            if (!existe)
+            {
+                ventasFacturando.Add(venta);
+                listaFactura.Items.Add(productoSeleccionado.ID + " -. " + productoSeleccionado.PRODUCTO + " x " + comboCantidad.Text + "   -----------------------   " + subTotal + " $");
+                total += subTotal;
+                labelTotal.Text = total + " $";
+
                 foreach (Ingrediente ingrediente in ingredientesEnProceso)
                 {
-                   
-        
-                for (int i = 0; i < materiasPrimasActuales.Count; i++) 
-                {
-                    if (materiasPrimasActuales[i].idMateriaPrima.Equals(ingrediente.idmateriaPrima))
+
+
+                    for (int i = 0; i < materiasPrimasActuales.Count; i++)
                     {
+                        if (materiasPrimasActuales[i].idMateriaPrima.Equals(ingrediente.idmateriaPrima))
+                        {
 
-                        if (ingrediente.gramos > 0)
-                        {
-                            materiasPrimasActuales[i].gramos = materiasPrimasActuales[i].gramos - (ingrediente.gramos * Int32.Parse(comboCantidad.Text));
-                        }
-                        else if (ingrediente.mililitros > 0)
-                        {
-                            materiasPrimasActuales[i].mililitros = materiasPrimasActuales[i].mililitros - (ingrediente.mililitros * Int32.Parse(comboCantidad.Text));
-                        }
-                        else
-                        {
-                            materiasPrimasActuales[i].unidades = materiasPrimasActuales[i].unidades - (ingrediente.unidades * Int32.Parse(comboCantidad.Text));
+                            if (ingrediente.gramos > 0)
+                            {
+                                materiasPrimasActuales[i].gramos = materiasPrimasActuales[i].gramos - (ingrediente.gramos * Int32.Parse(comboCantidad.Text));
+                            }
+                            else if (ingrediente.mililitros > 0)
+                            {
+                                materiasPrimasActuales[i].mililitros = materiasPrimasActuales[i].mililitros - (ingrediente.mililitros * Int32.Parse(comboCantidad.Text));
+                            }
+                            else
+                            {
+                                materiasPrimasActuales[i].unidades = materiasPrimasActuales[i].unidades - (ingrediente.unidades * Int32.Parse(comboCantidad.Text));
+                            }
+
+                            materiasPrimasParaActualizar.Add(materiasPrimasActuales[i]);
+
                         }
 
-                        materiasPrimasParaActualizar.Add(materiasPrimasActuales[i]);
-                       
                     }
 
                 }
 
-                }
-           
+
+            }
+            else 
+            {
+                MessageBox.Show("Producto ya ingresado");
+            
+            }
+
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -1125,6 +1145,11 @@ namespace Presentacion
         private void button6_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedIndex = 1;
+        }
+
+        private void btnCancelarFactura_Click(object sender, EventArgs e)
+        {
+            LimpiarFactura();
         }
     }
 }

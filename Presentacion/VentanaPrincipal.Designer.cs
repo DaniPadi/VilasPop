@@ -112,6 +112,7 @@
             this.label24 = new System.Windows.Forms.Label();
             this.txtNombreProveedor = new System.Windows.Forms.TextBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.btnCancelarFactura = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupCliente = new System.Windows.Forms.GroupBox();
             this.registrarCLiente = new System.Windows.Forms.Button();
@@ -230,10 +231,10 @@
             this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Controls.Add(this.tabPage8);
             this.tabControl1.Controls.Add(this.tabPage9);
-            this.tabControl1.Location = new System.Drawing.Point(12, -21);
+            this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(912, 476);
+            this.tabControl1.Size = new System.Drawing.Size(912, 443);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -249,7 +250,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(904, 450);
+            this.tabPage1.Size = new System.Drawing.Size(904, 417);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -1103,6 +1104,7 @@
             // tabPage6
             // 
             this.tabPage6.BackgroundImage = global::Presentacion.Properties.Resources.fondo5;
+            this.tabPage6.Controls.Add(this.btnCancelarFactura);
             this.tabPage6.Controls.Add(this.groupBox2);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
@@ -1111,6 +1113,16 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "tabPage6";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // btnCancelarFactura
+            // 
+            this.btnCancelarFactura.Location = new System.Drawing.Point(19, 26);
+            this.btnCancelarFactura.Name = "btnCancelarFactura";
+            this.btnCancelarFactura.Size = new System.Drawing.Size(134, 23);
+            this.btnCancelarFactura.TabIndex = 17;
+            this.btnCancelarFactura.Text = "Cancelar Factura";
+            this.btnCancelarFactura.UseVisualStyleBackColor = true;
+            this.btnCancelarFactura.Click += new System.EventHandler(this.btnCancelarFactura_Click);
             // 
             // groupBox2
             // 
@@ -2056,5 +2068,6 @@
         private System.Windows.Forms.Button btnEliminarMP;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button btnRegresarP;
+        private System.Windows.Forms.Button btnCancelarFactura;
     }
 }
