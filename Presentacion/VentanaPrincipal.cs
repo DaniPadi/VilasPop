@@ -294,7 +294,7 @@ namespace Presentacion
         }
         public void CargarMateriasP()
         {
-            List<MateriaPrimaDTO> listaDTO = servicioMateriaPrima.obtenerDTO();
+            List<MateriaPrimaDTO> listaDTO = servicioMateriaPrima.obtenerDTOValido();
             grillaMateriaP.DataSource = listaDTO;
         }
 
