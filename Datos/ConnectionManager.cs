@@ -9,10 +9,11 @@ namespace Datos
 {
     public class ConnectionManager
     {
-        protected OracleConnection conexion;
+        public OracleConnection conexion;
         public ConnectionManager(string connectionString)
         {
             conexion = new OracleConnection(connectionString);
+
         }
         public void Open()
         {

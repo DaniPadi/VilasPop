@@ -6,12 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entidades;
+using System.Xml.Linq;
+
 namespace Datos
 {
     public class FacturaRepositorio : ConnectionManager
     {
+        
         public FacturaRepositorio(string connectionString) : base(connectionString)
         {
+
         }
 
         public List<Factura> obtenerFacturasDesdeHasta(DateTime inicio, DateTime fin)
@@ -42,14 +46,14 @@ namespace Datos
 
             Open();
             OracleDataReader reader = command.ExecuteReader();
-
+            string connectionString = "Data source =localhost:1521/xepdb1; user ID= Vilaspop; Password= vilaspop; Unicode = true;";
             while (reader.Read())
             {
                 Factura factura = new Factura();
                 factura.id_factura = reader.GetString(0);
                 factura.fecha = reader.GetDateTime(1);
                 factura.precioTotal = reader.GetFloat(2);
-                factura.cliente = new ClienteRepositorio(conexion.ConnectionString).BuscarCliente(reader.GetString(3));
+                factura.cliente = new ClienteRepositorio(connectionString).BuscarCliente(reader.GetString(3));
                 factura.IdMetodo = reader.GetInt32(4).ToString();
                 facturas.Add(factura);
             }
@@ -94,11 +98,12 @@ namespace Datos
 
             while (reader.Read())
             {
+                string connectionString = "Data source =localhost:1521/xepdb1; user ID= Vilaspop; Password= vilaspop; Unicode = true;";
                 Factura factura = new Factura();
                 factura.id_factura = reader.GetString(0);
                 factura.fecha = reader.GetDateTime(1);
                 factura.precioTotal = reader.GetFloat(2);
-                factura.cliente= new ClienteRepositorio(conexion.ConnectionString).BuscarCliente(reader.GetString(3));
+                factura.cliente = new ClienteRepositorio(connectionString).BuscarCliente(reader.GetString(3));
                 factura.IdMetodo = reader.GetInt32(4).ToString();
                 facturas.Add(factura);
             }
