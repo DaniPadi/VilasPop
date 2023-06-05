@@ -70,5 +70,44 @@ namespace Datos
 
 
         }
+
+        public Cliente BuscarCliente(string id)
+        {
+            Cliente cliente = new Cliente();
+
+            OracleCommand command = new OracleCommand("obtener_cliente", conexion);
+            command.CommandType= CommandType.StoredProcedure;
+
+            OracleParameter resultCursor = new OracleParameter();
+            resultCursor.ParameterName = "result_cursor";
+            resultCursor.OracleType = OracleType.Cursor;
+            resultCursor.Direction = ParameterDirection.ReturnValue;
+
+            OracleParameter Idcedula = new OracleParameter();
+            Idcedula.ParameterName = "v_id_cliente";
+            Idcedula.OracleType = OracleType.VarChar;
+            Idcedula.Value = id;
+
+            command.Parameters.Add(resultCursor);
+            command.Parameters.Add(Idcedula);
+
+            Open();
+
+            OracleDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                cliente.cedula = reader.GetString(0);
+                cliente.nombre = reader.GetString(1);
+                cliente.apellido = reader.GetString(2);
+                cliente.telefono = reader.GetString(3);
+                cliente.correo = reader.GetString(4);
+            }
+
+            reader.Close();
+            Close();
+
+            return cliente;
+        }
     }
 }

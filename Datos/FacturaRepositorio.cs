@@ -6,12 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entidades;
+using System.Xml.Linq;
+
 namespace Datos
 {
     public class FacturaRepositorio : ConnectionManager
     {
+        
         public FacturaRepositorio(string connectionString) : base(connectionString)
         {
+
         }
 
         public List<Factura> obtenerFacturasDesdeHasta(DateTime inicio, DateTime fin)
@@ -42,14 +46,14 @@ namespace Datos
 
             Open();
             OracleDataReader reader = command.ExecuteReader();
-
+            string connectionString = "Data source =localhost:1521/xepdb1; user ID= Vilaspop; Password= vilaspop; Unicode = true;";
             while (reader.Read())
             {
                 Factura factura = new Factura();
                 factura.id_factura = reader.GetString(0);
                 factura.fecha = reader.GetDateTime(1);
                 factura.precioTotal = reader.GetFloat(2);
-                factura.IdCliente = reader.GetString(3);
+                factura.cliente = new ClienteRepositorio(connectionString).BuscarCliente(reader.GetString(3));
                 factura.IdMetodo = reader.GetInt32(4).ToString();
                 facturas.Add(factura);
             }
@@ -68,7 +72,7 @@ namespace Datos
             command.Parameters.Add("v_id_factura", OracleType.VarChar).Value = factura.id_factura;
             command.Parameters.Add("v_fechafactura", OracleType.DateTime).Value = factura.fecha;
             command.Parameters.Add("v_preciototal", OracleType.Number).Value = factura.precioTotal;
-            command.Parameters.Add("v_cliente", OracleType.VarChar).Value = factura.IdCliente;
+            command.Parameters.Add("v_cliente", OracleType.VarChar).Value = factura.cliente.cedula;
             command.Parameters.Add("v_id_metodo", OracleType.Number).Value = Int32.Parse(factura.IdMetodo);
             command.ExecuteNonQuery();
             Close();
@@ -94,11 +98,12 @@ namespace Datos
 
             while (reader.Read())
             {
+                string connectionString = "Data source =localhost:1521/xepdb1; user ID= Vilaspop; Password= vilaspop; Unicode = true;";
                 Factura factura = new Factura();
                 factura.id_factura = reader.GetString(0);
                 factura.fecha = reader.GetDateTime(1);
                 factura.precioTotal = reader.GetFloat(2);
-                factura.IdCliente = reader.GetString(3);
+                factura.cliente = new ClienteRepositorio(connectionString).BuscarCliente(reader.GetString(3));
                 factura.IdMetodo = reader.GetInt32(4).ToString();
                 facturas.Add(factura);
             }
@@ -106,11 +111,7 @@ namespace Datos
             reader.Close();
             Close();
 
-
-
             return facturas;
-
-
         }
     }
 }

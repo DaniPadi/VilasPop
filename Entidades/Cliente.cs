@@ -8,8 +8,6 @@ namespace Entidades
 {
     public class Cliente
     {
-
-
         public String cedula { get; set; }
         public String nombre { get; set; }
         public String apellido { get; set; }
@@ -24,7 +22,6 @@ namespace Entidades
             this.telefono = telefono;
             this.correo = correo;
         }
-
         public Cliente()
         {
         }
