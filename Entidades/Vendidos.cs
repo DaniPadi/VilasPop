@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class Venta
+    public class Vendidos
     {
-        public Venta()
+        public Vendidos()
         {
         }
 
-        public Venta(string id_producto, string id_factura, int cantidad, float valor)
+        public Vendidos(string id_producto, string id_factura, int cantidad, float valor)
         {
             this.id_producto = id_producto;
             this.id_factura = id_factura;

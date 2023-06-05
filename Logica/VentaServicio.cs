@@ -16,17 +16,17 @@ namespace Logica
             this.ventaRepositorio = new VentaRepositorio(stringConnection);
         }
 
-        public int Insert(List<Venta> ventas) 
+        public int Insert(List<Vendidos> ventas) 
         {
             int filas = 0;
-            foreach (Venta venta in ventas) 
+            foreach (Vendidos venta in ventas) 
             {
                 filas += ventaRepositorio.Insert(venta);
             }
             return filas;
         }
 
-        public List<Venta> obtenerVentasConFactura(string factura) 
+        public List<Vendidos> obtenerVentasConFactura(string factura) 
         {
             return ventaRepositorio.obtenerVentasConFactura(factura);
         }  

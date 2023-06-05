@@ -91,7 +91,7 @@
     <Compile Include="Proveedor.cs" />
     <Compile Include="Receta.cs" />
     <Compile Include="Ingrediente.cs" />
-    <Compile Include="Venta.cs" />
+    <Compile Include="Vendidos.cs" />
     <Compile Include="FacturasInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

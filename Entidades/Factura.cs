@@ -27,6 +27,6 @@ namespace Entidades
         public float precioTotal { get; set; }
         public Cliente cliente { get; set; }
         public string IdMetodo { get; set; }
-        public List<Venta> Detalles { get; set; }
+        public List<Vendidos> Detalles { get; set; }
     }
 }

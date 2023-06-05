@@ -15,7 +15,7 @@ namespace Datos
         {
         }
 
-        public int Insert(Venta venta) 
+        public int Insert(Vendidos venta) 
         {
             Open();
             OracleCommand command = new OracleCommand("ingresar_vendido", conexion);
@@ -30,10 +30,10 @@ namespace Datos
 
         }
 
-        public List<Venta> obtenerVentasConFactura(string id_factura) 
+        public List<Vendidos> obtenerVentasConFactura(string id_factura) 
         {
 
-            List<Venta> ventas = new List<Venta>();
+            List<Vendidos> ventas = new List<Vendidos>();
 
             OracleCommand command = new OracleCommand("obtener_vendidos_por_factura", conexion);
             command.CommandType = CommandType.StoredProcedure;
@@ -57,7 +57,7 @@ namespace Datos
 
             while (reader.Read())
             {
-                Venta venta = new Venta();
+                Vendidos venta = new Vendidos();
                venta.id_producto = reader.GetInt32(0).ToString();
                 venta.id_factura = reader.GetString(1);
                 venta.cantidad = reader.GetInt32(2);

@@ -47,7 +47,7 @@ namespace Presentacion
         float total = 0;
         float dineroDado = 0;
         float cambio = 0F;
-        List<Venta> ventasFacturando = new List<Venta>();
+        List<Vendidos> ventasFacturando = new List<Vendidos>();
         string CodigoFactura = null;
         List<MateriaPrima> materiasPrimasActuales = new List<MateriaPrima>();
         List<Ingrediente> ingredientesEnProceso = new List<Ingrediente>();
@@ -556,9 +556,9 @@ namespace Presentacion
         {
             string fecha = DateTime.Now.ToShortDateString();
             CodigoFactura = ObtenerDigitosFecha(fecha) + servicioFactura.obtenerCodigoFactura();
-            Venta venta = new Venta(productoSeleccionado.ID, CodigoFactura, Int32.Parse(comboCantidad.Text), subTotal);
+            Vendidos venta = new Vendidos(productoSeleccionado.ID, CodigoFactura, Int32.Parse(comboCantidad.Text), subTotal);
             bool existe = false;
-            foreach (Venta vent in ventasFacturando) 
+            foreach (Vendidos vent in ventasFacturando) 
             {
                 if (vent.id_producto.Equals(venta.id_producto)) 
                 {
@@ -681,7 +681,7 @@ namespace Presentacion
              total = 0;
             dineroDado = 0;
              cambio = 0;
-           ventasFacturando = new List<Venta>();
+           ventasFacturando = new List<Vendidos>();
             CodigoFactura = null;
              materiasPrimasActuales = new List<MateriaPrima>();
              ingredientesEnProceso = new List<Ingrediente>();
@@ -748,7 +748,7 @@ namespace Presentacion
             {
                 DataGridViewRow row = grillaFacturas.Rows[e.RowIndex];
                 Factura facturaselected = (Factura)row.DataBoundItem;
-                List<Venta> ventas = servicioVenta.obtenerVentasConFactura(facturaselected.id_factura);
+                List<Vendidos> ventas = servicioVenta.obtenerVentasConFactura(facturaselected.id_factura);
                 grillaVendidos.DataSource= ventas;
                 grillaVendidos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                
