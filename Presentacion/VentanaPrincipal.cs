@@ -875,7 +875,7 @@ namespace Presentacion
 
         private void btnProductos_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedIndex = 8;
+            tabControl1.SelectedIndex = 1;
         }
 
         private void btnMateriaP_Click(object sender, EventArgs e)

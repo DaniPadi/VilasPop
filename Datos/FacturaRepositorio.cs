@@ -49,7 +49,7 @@ namespace Datos
                 factura.id_factura = reader.GetString(0);
                 factura.fecha = reader.GetDateTime(1);
                 factura.precioTotal = reader.GetFloat(2);
-                factura.cliente.cedula = reader.GetString(3);
+                factura.cliente = new ClienteRepositorio(conexion.ConnectionString).BuscarCliente(reader.GetString(3));
                 factura.IdMetodo = reader.GetInt32(4).ToString();
                 facturas.Add(factura);
             }
@@ -98,7 +98,7 @@ namespace Datos
                 factura.id_factura = reader.GetString(0);
                 factura.fecha = reader.GetDateTime(1);
                 factura.precioTotal = reader.GetFloat(2);
-                factura.cliente= new ClienteRepositorio(this.conexion.ConnectionString).BuscarCliente(reader.GetString(3));
+                factura.cliente= new ClienteRepositorio(conexion.ConnectionString).BuscarCliente(reader.GetString(3));
                 factura.IdMetodo = reader.GetInt32(4).ToString();
                 facturas.Add(factura);
             }
