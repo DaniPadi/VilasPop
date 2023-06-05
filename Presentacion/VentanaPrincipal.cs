@@ -32,6 +32,7 @@ namespace Presentacion
         FacturaServicio servicioFactura = new FacturaServicio(ConfigConnection.connectionString);
         VentaServicio servicioVenta = new VentaServicio(ConfigConnection.connectionString);
         ClienteServicio servicioCLiente = new ClienteServicio(ConfigConnection.connectionString);
+
         //Instancias de variables globales
 
         //sección de recetas
