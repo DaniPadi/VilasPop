@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VentanaPrincipal));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnProveedores = new System.Windows.Forms.Button();
             this.btnFactura = new System.Windows.Forms.Button();
             this.btnMateriaP = new System.Windows.Forms.Button();
@@ -231,16 +230,15 @@
             this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Controls.Add(this.tabPage8);
             this.tabControl1.Controls.Add(this.tabPage9);
-            this.tabControl1.Location = new System.Drawing.Point(12, -24);
+            this.tabControl1.Location = new System.Drawing.Point(12, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(912, 479);
+            this.tabControl1.Size = new System.Drawing.Size(912, 453);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
             // 
             this.tabPage1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tabPage1.BackgroundImage")));
-            this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.btnProveedores);
             this.tabPage1.Controls.Add(this.btnFactura);
             this.tabPage1.Controls.Add(this.btnMateriaP);
@@ -250,29 +248,17 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(904, 417);
+            this.tabPage1.Size = new System.Drawing.Size(904, 427);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
-            this.button1.Font = new System.Drawing.Font("Bauhaus 93", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.CadetBlue;
-            this.button1.Location = new System.Drawing.Point(465, 327);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(180, 27);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "CLIENTES";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // btnProveedores
             // 
             this.btnProveedores.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnProveedores.BackgroundImage")));
             this.btnProveedores.Font = new System.Drawing.Font("Bauhaus 93", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnProveedores.ForeColor = System.Drawing.Color.CadetBlue;
-            this.btnProveedores.Location = new System.Drawing.Point(259, 327);
+            this.btnProveedores.Location = new System.Drawing.Point(357, 314);
             this.btnProveedores.Name = "btnProveedores";
             this.btnProveedores.Size = new System.Drawing.Size(180, 27);
             this.btnProveedores.TabIndex = 11;
@@ -355,7 +341,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(904, 417);
+            this.tabPage2.Size = new System.Drawing.Size(904, 427);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -542,7 +528,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(904, 417);
+            this.tabPage3.Size = new System.Drawing.Size(904, 427);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -714,6 +700,7 @@
             this.txtCostoM.Name = "txtCostoM";
             this.txtCostoM.Size = new System.Drawing.Size(81, 20);
             this.txtCostoM.TabIndex = 10;
+            this.txtCostoM.Text = "0";
             // 
             // label13
             // 
@@ -814,7 +801,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(904, 453);
+            this.tabPage4.Size = new System.Drawing.Size(904, 427);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -985,7 +972,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(904, 417);
+            this.tabPage5.Size = new System.Drawing.Size(904, 427);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "tabPage5";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1109,7 +1096,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(904, 417);
+            this.tabPage6.Size = new System.Drawing.Size(904, 427);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "tabPage6";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -1383,7 +1370,7 @@
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(904, 417);
+            this.tabPage7.Size = new System.Drawing.Size(904, 427);
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "tabPage7";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -1524,7 +1511,7 @@
             this.tabPage8.Location = new System.Drawing.Point(4, 22);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(904, 417);
+            this.tabPage8.Size = new System.Drawing.Size(904, 453);
             this.tabPage8.TabIndex = 7;
             this.tabPage8.Text = "tabPage8";
             this.tabPage8.UseVisualStyleBackColor = true;
@@ -1650,7 +1637,7 @@
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(904, 417);
+            this.tabPage9.Size = new System.Drawing.Size(904, 427);
             this.tabPage9.TabIndex = 8;
             this.tabPage9.Text = "tabPage9";
             this.tabPage9.UseVisualStyleBackColor = true;
@@ -2033,7 +2020,6 @@
         private System.Windows.Forms.Button btnRegresar3;
         private System.Windows.Forms.Button btnRegresar4;
         private System.Windows.Forms.Button btnRegresar5;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TabPage tabPage8;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridView dataGridView1;

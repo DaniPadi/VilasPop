@@ -290,7 +290,7 @@ namespace Presentacion
 
             CargarMateriasP();
             cargarComboIngredientes();
-            Console.WriteLine("pasooo");
+           txtCostoM.Text = "0";
         }
         public void CargarMateriasP()
         {
@@ -935,10 +935,12 @@ namespace Presentacion
         {
             txtGramosM.Enabled = radioGramos.Checked;
             txtMililitrosM.Enabled = radioMililitros.Checked;
+            txtMililitrosM.Text = "0";
             txtUnidadesM.Enabled = radioUnidades.Checked;
+            txtUnidadesM.Text = "0";
             //if (radioGramos.Checked)
             //{
-                
+
             //    DesactivarCamposRadioButton(txtMililitrosM);
             //    DesactivarCamposRadioButton(txtUnidadesM);
             //}
@@ -959,14 +961,18 @@ namespace Presentacion
         private void radioMililitros_CheckedChanged(object sender, EventArgs e)
         {
             txtGramosM.Enabled = radioGramos.Checked;
+            txtGramosM.Text = "0";
             txtMililitrosM.Enabled = radioMililitros.Checked;
             txtUnidadesM.Enabled = radioUnidades.Checked;
+            txtUnidadesM.Text = "0";
         }
 
         private void radioUnidades_CheckedChanged(object sender, EventArgs e)
         {
             txtGramosM.Enabled = radioGramos.Checked;
+            txtGramosM.Text = "0";
             txtMililitrosM.Enabled = radioMililitros.Checked;
+            txtMililitrosM.Text = "0";
             txtUnidadesM.Enabled = radioUnidades.Checked;
         }
 
@@ -1041,12 +1047,18 @@ namespace Presentacion
 
             if (ingredienteSelected != null)
             {
-                servicioIngrediente.Eliminar(ingredienteSelected);
-                MessageBox.Show("Ingrediente Eliminado");
-                List<Ingrediente> ingrdientes = new List<Ingrediente>();
-                ingrdientes = servicioIngrediente.obtenerIngredientesPorReceta(idProducto.Text);
-                tablaIngredientes.DataSource = ingrdientes;
-                ingredienteSelected= null;
+                DialogResult result = MessageBox.Show("¿Desea eliminar el ingrediente?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    servicioIngrediente.Eliminar(ingredienteSelected);
+                    MessageBox.Show("Ingrediente Eliminado");
+                    List<Ingrediente> ingrdientes = new List<Ingrediente>();
+                    ingrdientes = servicioIngrediente.obtenerIngredientesPorReceta(idProducto.Text);
+                    tablaIngredientes.DataSource = ingrdientes;
+                    ingredienteSelected = null;
+
+                }
+               
 
             }
             else 
@@ -1126,9 +1138,15 @@ namespace Presentacion
         {
             if (materiaPrimaSeleccionada != null)
             {
+                DialogResult result = MessageBox.Show("¿Desea desechar la materia Prima?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes) 
+                {
                 string msg = servicioMateriaPrima.UpdateCero(Int32.Parse(materiaPrimaSeleccionada.idMateriaPrima));
                 materiaPrimaSeleccionada = null;
                 MessageBox.Show("Materia Prima eliminada");
+                
+                }
+
             }
             else 
             {
@@ -1149,7 +1167,13 @@ namespace Presentacion
 
         private void btnCancelarFactura_Click(object sender, EventArgs e)
         {
-            LimpiarFactura();
+            DialogResult result = MessageBox.Show("¿Desea desechar la factura actual?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                LimpiarFactura();
+
+            }
+          
         }
     }
 }
