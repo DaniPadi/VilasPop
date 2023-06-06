@@ -230,11 +230,11 @@
             this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Controls.Add(this.tabPage8);
             this.tabControl1.Controls.Add(this.tabPage9);
-            this.tabControl1.Location = new System.Drawing.Point(16, -21);
+            this.tabControl1.Location = new System.Drawing.Point(16, -28);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1216, 581);
+            this.tabControl1.Size = new System.Drawing.Size(1216, 588);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -250,7 +250,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabPage1.Size = new System.Drawing.Size(1208, 552);
+            this.tabPage1.Size = new System.Drawing.Size(1208, 559);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
