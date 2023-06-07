@@ -17,6 +17,7 @@ using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Org.BouncyCastle.Asn1.Crmf;
+using System.Diagnostics;
 
 namespace Presentacion
 {
@@ -867,6 +868,8 @@ namespace Presentacion
 
             // Cerrar el documento
             document.Close();
+
+            Process.Start(filePath);
 
             // Mostrar un mensaje de éxito
             MessageBox.Show("Archivo PDF generado correctamente.");
