@@ -60,6 +60,26 @@ namespace Logica
 
         }
 
+        public Producto obtenerProductoPorID(string id) 
+        {
+            Producto producto = new Producto();
+            List<Producto> productos = obtenerProductos();
+            foreach (Producto product in productos) 
+            {
+
+                if (product.idProducto.Equals(id)) 
+                {
+                
+                producto = product;
+                }
+            
+            }
+
+            return producto;
+
+
+        }
+
         public string Update(Producto producto) 
         {
 

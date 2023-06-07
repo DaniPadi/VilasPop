@@ -55,6 +55,7 @@ namespace Datos
                 factura.precioTotal = reader.GetFloat(2);
                 factura.cliente = new ClienteRepositorio(connectionString).BuscarCliente(reader.GetString(3));
                 factura.IdMetodo = reader.GetInt32(4).ToString();
+               // factura.Detalles = new VentaRepositorio(connectionString).obtenerVentasConFactura(factura.id_factura);
                 facturas.Add(factura);
             }
 

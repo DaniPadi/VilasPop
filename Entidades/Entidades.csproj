@@ -80,7 +80,9 @@
     <Compile Include="Cargo.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Factura.cs" />
+    <Compile Include="FacturaDTO.cs" />
     <Compile Include="Gasto.cs" />
+    <Compile Include="IngredienteDTO.cs" />
     <Compile Include="IngredientesEnEspera.cs" />
     <Compile Include="MateriaPrima.cs" />
     <Compile Include="MateriaPrimaDTO.cs" />
@@ -91,6 +93,7 @@
     <Compile Include="Proveedor.cs" />
     <Compile Include="Receta.cs" />
     <Compile Include="Ingrediente.cs" />
+    <Compile Include="VendidoDTO.cs" />
     <Compile Include="Vendidos.cs" />
     <Compile Include="FacturasInfo.cs" />
   </ItemGroup>

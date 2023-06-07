@@ -41,6 +41,8 @@ namespace Presentacion
         string PrecioProductoEnProceso = "";
         List<IngredientesEnEspera> ingredientesProceso = new List<IngredientesEnEspera>();
 
+
+
         //Sección de facturación
         ProductoDTO productoSeleccionado = new ProductoDTO();
         float subTotal = 0;
@@ -58,6 +60,7 @@ namespace Presentacion
 
         //Sección de materias primas
         MateriaPrima materiaPrimaSeleccionada = null;
+        bool cargandoMateriasPrimas = false;
 
         public string Informacion { get; set; }
         public VentanaPrincipal()   
@@ -83,14 +86,23 @@ namespace Presentacion
             {
                 if (!creandoReceta)
                 {
+                    if (float.Parse(txtPrecioProductoR.Text) != 0)
+                    {
+                        creandoReceta = true;
+                        groupIngredientes.Enabled = true;
+                        btnEmpezarReceta.Text = "Finalizar";
+                        txtnombreProducto.Enabled = false;
+                        txtPrecioProductoR.Enabled = false;
+                        ProductoEnProceso = txtnombreProducto.Text;
+                        PrecioProductoEnProceso = txtPrecioProductoR.Text;
 
-                    creandoReceta = true;
-                    groupIngredientes.Enabled = true;
-                    btnEmpezarReceta.Text = "Finalizar";
-                    txtnombreProducto.Enabled = false;
-                    txtPrecioProductoR.Enabled = false;
-                    ProductoEnProceso = txtnombreProducto.Text;
-                    PrecioProductoEnProceso = txtPrecioProductoR.Text;
+                    }
+                    else 
+                    {
+
+                        MessageBox.Show("No puede tener un valor de 0");
+                    }
+                  
 
 
                 }
@@ -159,7 +171,8 @@ namespace Presentacion
                         cargarProductosVenta();
                         txtnombreProducto.Text = "";
                         txtPrecioProductoR.Text = "";
-                        txtDescripcion.Text = "";
+                        txtDescripcion.Text = " ";
+                        txtCantidadIngrediente.Text = "0";
                          creandoReceta = false;
                          ProductoEnProceso = "";
                         PrecioProductoEnProceso = "";
@@ -188,35 +201,46 @@ namespace Presentacion
             if ((!EsNulo(txtNombreMateriaP.Text)) && (!EsNulo(txtGramosM.Text)) &&(!EsNulo(txtGramosM.Text))
                 && (!EsNulo(txtUnidadesM.Text)) && (!EsNulo(txtCostoM.Text)))
             {
-                bool ActualizarMp = false;
-                List<MateriaPrimaDTO> mtDTO = servicioMateriaPrima.obtenerDTO();
-                int idViejo = 0;
-                foreach (MateriaPrimaDTO materia in mtDTO)
+                if (txtDateCaducidad.Value > DateTime.Now)
                 {
-                    if (txtNombreMateriaP.Text.ToUpper().Equals(materia.NOMBRE))
+                    bool ActualizarMp = false;
+                    List<MateriaPrimaDTO> mtDTO = servicioMateriaPrima.obtenerDTO();
+                    int idViejo = 0;
+                    foreach (MateriaPrimaDTO materia in mtDTO)
                     {
-                        if (Int32.Parse(materia.ID) > idViejo) 
+                        if (txtNombreMateriaP.Text.ToUpper().Equals(materia.NOMBRE))
                         {
-                            idViejo = Int32.Parse(materia.ID);
+                            if (Int32.Parse(materia.ID) > idViejo)
+                            {
+                                idViejo = Int32.Parse(materia.ID);
 
-                            
-                            ActualizarMp = true;
-                            idViejo = Int32.Parse(materia.ID);
+
+                                ActualizarMp = true;
+                                idViejo = Int32.Parse(materia.ID);
+                            }
+
+
                         }
+                    }
+                    Console.WriteLine(idViejo);
+                    ingresarMateriaPrima();
+                    if (ActualizarMp)
+                    {
 
+                        reEnfocarProductos(Int32.Parse(txtIdMateriaPrima.Text) - 1, idViejo);
+                        DesecharMateriaPrima(idViejo);
+                        CargarMateriasP();
+                        cargarComboIngredientes();
 
                     }
+
                 }
-                Console.WriteLine(idViejo);
-                ingresarMateriaPrima();
-                if (ActualizarMp)
+                else 
                 {
-                   
-                    reEnfocarProductos(Int32.Parse(txtIdMateriaPrima.Text) - 1 , idViejo);
-                    DesecharMateriaPrima(idViejo);
-
+                MessageBox.Show("No puede registrar materia prima caducada.");
 
                 }
+
             }
             else
             {
@@ -291,6 +315,12 @@ namespace Presentacion
             CargarMateriasP();
             cargarComboIngredientes();
            txtCostoM.Text = "0";
+           txtGramosM.Text = "0";
+            txtMililitrosM.Text = "0";
+            txtUnidadesM.Text = "0";
+            comboProveedor.SelectedIndex = 0;
+            txtNombreMateriaP.Text = "";
+            
         }
         public void CargarMateriasP()
         {
@@ -359,6 +389,7 @@ namespace Presentacion
         //Recetas-----------------------------------------------------------------
         public void cargarComboIngredientes() 
         {
+            cargandoMateriasPrimas = true;
             List<MateriaPrima> materiasP = servicioMateriaPrima.obtenerMateriasPrimasValidas();
             comboMateriaP.Items.Clear();
             comboMateriaP.Items.Add("--Seleccionar ingrediente--");
@@ -372,6 +403,7 @@ namespace Presentacion
             }
             comboMateriaP.SelectedIndex= 0;
             comboMateriaP2.SelectedIndex= 0;
+            cargandoMateriasPrimas = false;
         }
 
         private void btnIngresarIngrediente_Click(object sender, EventArgs e)
@@ -717,11 +749,14 @@ namespace Presentacion
                 List<Factura> facturas = servicioFactura.obtenerFacturasDesdeHasta(inicio,fin);
                 if (facturas.Count > 0)
                 {
-                    grillaFacturas.DataSource = facturas;
+                    List<FacturaDTO> facturasDTO = servicioFactura.convertirDTO(facturas);
+                    grillaFacturas.DataSource = facturasDTO;
                     grillaFacturas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                     FacturasInfo infoFacturas = servicioFactura.infoFacturas(facturas);
                     labelInfo1.Text = "Número de facturas: "+infoFacturas.ventas;
                     labelInfo2.Text = "Dinero ingresado: "+infoFacturas.dinero +" $";
+                    labelInfo3.Text = "";
+                    grillaVendidos.DataSource = new List<VendidoDTO>();
                 }
                 else 
                 {
@@ -747,14 +782,17 @@ namespace Presentacion
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = grillaFacturas.Rows[e.RowIndex];
-                Factura facturaselected = (Factura)row.DataBoundItem;
+                FacturaDTO facturaselectedDTO = (FacturaDTO)row.DataBoundItem;
+                List<Factura> facturas = servicioFactura.convertirDTOaNormal(new List<FacturaDTO>(){ facturaselectedDTO});
+                Factura facturaselected = facturas[0];
                 List<Vendidos> ventas = servicioVenta.obtenerVentasConFactura(facturaselected.id_factura);
-                grillaVendidos.DataSource= ventas;
+                List<VendidoDTO> vendidosDTO = servicioVenta.convertriDTO(ventas);
+                grillaVendidos.DataSource= vendidosDTO;
                 grillaVendidos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                
                 labelInfo1.Text = "Código Factura: " + facturaselected.id_factura;
                 labelInfo2.Text = $"Dinero ingresado: {facturaselected.precioTotal} $";
-                labelInfo3.Text = "Cliente: " + facturaselected.cliente.cedula;
+                labelInfo3.Text = "Cliente: " + facturaselected.cliente.nombre;
             }
                 
 
@@ -1021,7 +1059,8 @@ namespace Presentacion
             idProducto.Text = productoSeleccionado.ID;
             List<Ingrediente> ingrdientes = new List<Ingrediente>();
             ingrdientes = servicioIngrediente.obtenerIngredientesPorReceta(productoSeleccionado.ID);
-            tablaIngredientes.DataSource = ingrdientes;
+            List<IngredienteDTO> ingredientesDTO = servicioIngrediente.convertirDTO(ingrdientes);
+            tablaIngredientes.DataSource = ingredientesDTO;
 
         }
 
@@ -1029,11 +1068,20 @@ namespace Presentacion
         {
             if (!EsNulo(productName.Text) && (!EsNulo(ProductPrice.Text)))
             {
+                if (float.Parse(ProductPrice.Text) != 0)
+                {
+                    Producto producto = new Producto(idProducto.Text, productName.Text, float.Parse(ProductPrice.Text));
+                    servicioProducto.Update(producto);
+                    cargarProductosVenta();
+                    MessageBox.Show("Producto Actualizado");
 
-                Producto producto = new Producto(idProducto.Text,productName.Text,float.Parse(ProductPrice.Text));
-                servicioProducto.Update(producto);
-                cargarProductosVenta();
-                MessageBox.Show("Producto Actualizado");
+                }
+                else 
+                {
+                    MessageBox.Show("No puede tener un costo de 0");
+
+                }
+
 
             }
             else 
@@ -1054,7 +1102,8 @@ namespace Presentacion
                     MessageBox.Show("Ingrediente Eliminado");
                     List<Ingrediente> ingrdientes = new List<Ingrediente>();
                     ingrdientes = servicioIngrediente.obtenerIngredientesPorReceta(idProducto.Text);
-                    tablaIngredientes.DataSource = ingrdientes;
+                    List<IngredienteDTO> ingredientesDTO = servicioIngrediente.convertirDTO(ingrdientes);
+                    tablaIngredientes.DataSource = ingredientesDTO;
                     ingredienteSelected = null;
 
                 }
@@ -1076,7 +1125,9 @@ namespace Presentacion
         private void tablaIngredientes_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow row = tablaIngredientes.Rows[e.RowIndex];
-            ingredienteSelected = (Ingrediente)row.DataBoundItem;
+            IngredienteDTO ingredienteDTO = (IngredienteDTO)row.DataBoundItem;
+            List<Ingrediente> ingredientes =  servicioIngrediente.convertirDTOaNormal(new List<IngredienteDTO>(){ ingredienteDTO});
+            ingredienteSelected = ingredientes[0];
         }
 
         private void btnIngresar2_Click(object sender, EventArgs e)
@@ -1085,35 +1136,59 @@ namespace Presentacion
             {
                 Ingrediente ingrediente = new Ingrediente();
                 MateriaPrima materiaP = servicioMateriaPrima.obtenerMateriaPrimaConNombre(comboMateriaP2.Text);
-                ingrediente.idmateriaPrima = materiaP.idMateriaPrima;
-                ingrediente.idReceta = idProducto.Text;
-
-                if (comboUnidad2.Text.Equals("gr"))
+                List<Ingrediente> ingrs = servicioIngrediente.obtenerIngredientesPorReceta(productoSeleccionado.ID);
+                bool continuar = true;
+                foreach(Ingrediente ingr in ingrs) 
                 {
-                    ingrediente.gramos = float.Parse(txtCantidadIngr.Text);
-                    ingrediente.unidades = 0;
-                    ingrediente.mililitros = 0;
+                    if (ingr.idmateriaPrima.Equals(materiaP.idMateriaPrima)) 
+                    {
+
+                        continuar = false;
+                    }
                 }
-                else if (comboUnidad2.Text.Equals("ml"))
+                if (continuar)
                 {
-                    ingrediente.gramos = 0;
-                    ingrediente.unidades = 0;
-                    ingrediente.mililitros = float.Parse(txtCantidadIngr.Text);
+                    ingrediente.idmateriaPrima = materiaP.idMateriaPrima;
+
+                    ingrediente.idReceta = idProducto.Text;
+
+
+                    if (comboUnidad2.Text.Equals("gr"))
+                    {
+                        ingrediente.gramos = float.Parse(txtCantidadIngr.Text);
+                        ingrediente.unidades = 0;
+                        ingrediente.mililitros = 0;
+                    }
+                    else if (comboUnidad2.Text.Equals("ml"))
+                    {
+                        ingrediente.gramos = 0;
+                        ingrediente.unidades = 0;
+                        ingrediente.mililitros = float.Parse(txtCantidadIngr.Text);
+                    }
+                    else
+                    {
+                        ingrediente.gramos = 0;
+                        ingrediente.unidades = Int32.Parse(txtCantidadIngr.Text);
+                        ingrediente.mililitros = 0;
+
+                    }
+
+                    string msg = servicioIngrediente.Insert(new List<Ingrediente>() { ingrediente });
+                    MessageBox.Show("Ingrediente Ingresado");
+                    List<Ingrediente> ingrdientes = new List<Ingrediente>();
+                    ingrdientes = servicioIngrediente.obtenerIngredientesPorReceta(idProducto.Text);
+                    List<IngredienteDTO> ingredientesDTO = servicioIngrediente.convertirDTO(ingrdientes);
+                    tablaIngredientes.DataSource = ingredientesDTO;
+                    ingredienteSelected = null;
+
                 }
-                else
+                else 
                 {
-                    ingrediente.gramos = 0;
-                    ingrediente.unidades = Int32.Parse(txtCantidadIngr.Text);
-                    ingrediente.mililitros = 0;
+
+                    MessageBox.Show("Ya este ingrediente está incluido, eliminalo e ingresalo con la nueva cantidad.");
 
                 }
 
-                string msg = servicioIngrediente.Insert(new List<Ingrediente>() { ingrediente });
-                MessageBox.Show("Ingrediente Ingresado");
-                List<Ingrediente> ingrdientes = new List<Ingrediente>();
-                ingrdientes = servicioIngrediente.obtenerIngredientesPorReceta(idProducto.Text);
-                tablaIngredientes.DataSource = ingrdientes;
-                ingredienteSelected = null;
 
             }
             else 
@@ -1174,6 +1249,93 @@ namespace Presentacion
 
             }
           
+        }
+
+        private void comboMateriaP_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+                MateriaPrima materiaP = servicioMateriaPrima.obtenerMateriaPrimaConNombre(comboMateriaP.Text);
+                if (materiaP != null) 
+                {
+                if (materiaP.gramos > 0)
+                {
+                    comboUnidad.Items.Clear();
+                    comboUnidad.Text = "gr";
+                }
+                else if (materiaP.mililitros > 0)
+                {
+                    comboUnidad.Items.Clear();
+                    comboUnidad.Text = "ml";
+                }
+                else
+                {
+                    comboUnidad.Items.Clear();
+                    comboUnidad.Text = "ud";
+                }
+            }
+               
+
+            
+         
+        }
+
+        private void comboMateriaP2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MateriaPrima materiaP = servicioMateriaPrima.obtenerMateriaPrimaConNombre(comboMateriaP2.Text);
+            if (materiaP != null)
+            {
+                if (materiaP.gramos > 0)
+                {
+                    comboUnidad2.Items.Clear();
+                    comboUnidad2.Text = "gr";
+                }
+                else if (materiaP.mililitros > 0)
+                {
+                    comboUnidad2.Items.Clear();
+                    comboUnidad2.Text = "ml";
+                }
+                else
+                {
+                    comboUnidad2.Items.Clear();
+                    comboUnidad2.Text = "ud";
+                }
+            }
+
+        }
+
+        private void txtPrecioProductoR_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPrecioProductoR_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = EsNumero(e);
+        }
+
+        private void ProductPrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = EsNumero(e);
+        }
+
+        private void txtCostoM_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = EsNumero(e);
+        }
+
+        private void txtGramosM_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = EsNumero(e);
+        }
+
+        private void txtMililitrosM_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = EsNumero(e);
+        }
+
+        private void txtUnidadesM_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = EsNumero(e);
         }
     }
 }
